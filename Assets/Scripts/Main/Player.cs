@@ -4,16 +4,20 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private CharacterController _controller;
+    [SerializeField] private ArrowSpawner _spawner;
 
     private string _paramAtkSpeed = "fAtkSpeed";
     private string _paramAtk = "tShoot";
 
-    private float _power;
+    private float _power = 1;
+    private float _range = 1;
+    private float _arrowSpeed = 1;
+    private float _critPer = 0;
+    private bool _isPenetrate = false;
+
     private float _atkAniSpeed = 1.0f;
-    private float _atkRate;
-    private float _maxRange;
-    private float _servantPower;
-    private float _poison;
+    private float _atkRate = 1.0f;
+    private float _atkCool;
     private float _moveSpeed = 2.0f;
     private float _maxDistance = 4.0f;
     private Vector3 _startPos;
@@ -24,6 +28,8 @@ public class Player : MonoBehaviour
             _animator = GetComponent<Animator>();
         if (_controller == null)
             _controller = GetComponent<CharacterController>();
+        if (_spawner == null)
+            _spawner = GetComponentInChildren<ArrowSpawner>();
 
         if (_controller == null || _animator == null)
         {
@@ -40,8 +46,11 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (_atkCool <= 0)
+            ArrowFire();
         CharacterMove();
         _animator.SetTrigger(_paramAtk);
+        _atkCool -= Time.deltaTime;
     }
 
     void CharacterMove()
@@ -62,5 +71,11 @@ public class Player : MonoBehaviour
         }
 
         _controller.Move(movement);
+    }
+
+    void ArrowFire()
+    {
+        _spawner.SpawnArrow(_arrowSpeed, _range, _power, _critPer, _isPenetrate);
+        _atkCool = _atkRate;
     }
 }
