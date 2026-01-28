@@ -14,16 +14,16 @@ public class ArrowSpawner : MonoBehaviour
     {
         public GameObject arrow;
     }
-    public ArrowType[] _arrow;
+    public ArrowType[] _arrowType;
 
     private readonly Queue<GameObject> _pool = new Queue<GameObject>();
     private Transform _firePoint;
 
     void Start()
     {
-        if (_arrow == null)
+        if (_arrowType == null)
         {
-            Debug.LogError("화살 안넣었음");
+            Debug.LogWarning("화살 안넣었음");
             return;
         }
         _firePoint = transform;
@@ -35,7 +35,7 @@ public class ArrowSpawner : MonoBehaviour
 
     void AddPool()
     {
-        GameObject arrow = Instantiate(_arrow[0].arrow, _firePoint);
+        GameObject arrow = Instantiate(_arrowType[0].arrow, _firePoint);
         arrow.SetActive(false);
         _pool.Enqueue(arrow);
     }
@@ -59,7 +59,7 @@ public class ArrowSpawner : MonoBehaviour
 
     public void DespawnArrow(GameObject arrow)
     {
-        Debug.Log("회수");
+        //Debug.Log("회수");
         arrow.transform.SetParent(_firePoint);
         arrow.SetActive(false);
         _pool.Enqueue(arrow);

@@ -1,5 +1,15 @@
 using UnityEngine;
 
+public enum StatType
+{
+    ArrowPower,
+    ArrowRange,
+    ArrowSpeed,
+    AttackRate,
+    MoveSpeed,
+    CriticalPer
+}
+
 public class Player : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
@@ -9,16 +19,17 @@ public class Player : MonoBehaviour
     private string _paramAtkSpeed = "fAtkSpeed";
     private string _paramAtk = "tShoot";
 
-    private float _power = 1;
-    private float _range = 1;
-    private float _arrowSpeed = 1;
+    [SerializeField] private float _power = 1;
+    [SerializeField] private float _range = 1;
+    [SerializeField] private float _arrowSpeed = 1;
     private float _critPer = 0;
     private bool _isPenetrate = false;
 
-    private float _atkAniSpeed = 1.0f;
-    private float _atkRate = 1.0f;
+    [SerializeField]private float _hp = 100;
+    [SerializeField] private float _atkAniSpeed = 1.5f;
+    [SerializeField] private float _atkRate = 1.0f;
     private float _atkCool;
-    private float _moveSpeed = 2.0f;
+    [SerializeField] private float _moveSpeed = 2.0f;
     private float _maxDistance = 4.0f;
     private Vector3 _startPos;
 
@@ -33,7 +44,7 @@ public class Player : MonoBehaviour
 
         if (_controller == null || _animator == null)
         {
-            print("애니메이터 or 컨트롤로 없음 / 인스펙터 확인");
+            Debug.LogError("애니메이터 or 컨트롤로 없음 / 인스펙터 확인");
             return;
         }
     }
@@ -77,5 +88,46 @@ public class Player : MonoBehaviour
     {
         _spawner.SpawnArrow(_arrowSpeed, _range, _power, _critPer, _isPenetrate);
         _atkCool = _atkRate;
+    }
+
+    public void PlayerDamaged(float damage)
+    {
+        _hp -= damage;
+        if ( _hp <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Debug.Log("게임 종료 로비로");
+    }
+
+    public void ParameterChange(StatType type, int value)
+    {
+        // 나중에 이동속도 같은거에는 최소 최댓값 Clamp 설정하기
+        switch (type)
+        {
+            case StatType.ArrowPower:
+                _power *= Mathf.Pow(1.1f, value);
+                break;
+            case StatType.ArrowRange:
+                _range *= Mathf.Pow(1.1f, value);
+                break;
+            case StatType.ArrowSpeed:
+                _arrowSpeed *= Mathf.Pow(1.1f, value);
+                break;
+            case StatType.AttackRate:
+                _atkRate *= Mathf.Pow(0.9f, value);
+                _atkAniSpeed *= Mathf.Pow(1.1f, value);
+                break;
+            case StatType.MoveSpeed:
+                _moveSpeed *= Mathf.Pow(1.1f, value);
+                break;
+            case StatType.CriticalPer:
+                _critPer += value;
+                break;
+        }
     }
 }
