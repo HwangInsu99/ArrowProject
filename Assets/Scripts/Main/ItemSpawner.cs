@@ -15,6 +15,6 @@ public class ItemSpawner : MonoBehaviour
     public void SpawnItem()
     {
         if (_item == null) return;
-        Instantiate(_item, transform.position, Quaternion.identity);
+        Instantiate(_item, transform.position, Quaternion.Euler(0.0f, 180.0f, 0.0f));
     }
 }

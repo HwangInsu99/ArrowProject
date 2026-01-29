@@ -37,6 +37,7 @@ public class Item : MonoBehaviour
         {
             Player player = other.GetComponent<Player>();
             player.ParameterChange(_type, _value);
+            Destroy(gameObject);
         }
     }
 }

@@ -7,6 +7,7 @@ public enum StatType
     ArrowSpeed,
     AttackRate,
     MoveSpeed,
+    PlayerHp,
     CriticalPer
 }
 
@@ -90,13 +91,15 @@ public class Player : MonoBehaviour
         _atkCool = _atkRate;
     }
 
-    public void PlayerDamaged(float damage)
+    public bool PlayerDamaged(float damage)
     {
         _hp -= damage;
         if ( _hp <= 0)
         {
             Die();
+            return true;
         }
+        return false;
     }
 
     void Die()
@@ -124,6 +127,10 @@ public class Player : MonoBehaviour
                 break;
             case StatType.MoveSpeed:
                 _moveSpeed *= Mathf.Pow(1.1f, value);
+                break;
+            case StatType.PlayerHp:
+                value *= 50;
+                _hp += value;
                 break;
             case StatType.CriticalPer:
                 _critPer += value;

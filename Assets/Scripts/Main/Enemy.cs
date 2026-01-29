@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private string _playerLayer = "Player";
     [SerializeField] private ItemSpawner _itemSpawner;
 
-    [SerializeField] private float _hp = 80.0f;
+    [SerializeField] private float _hp = 50.0f;
     private float _speed = 2.0f;
     private Vector3 _baseScale;
     [SerializeField] private float _scaleUp = 1.1f;
@@ -14,6 +14,14 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        if (_itemSpawner == null)
+        {
+            _itemSpawner = GetComponent<ItemSpawner>();
+            if (_itemSpawner == null)
+            {
+                Debug.Log($"{gameObject}에 아이템 없음");
+            }
+        }
         _baseScale = transform.localScale;
     }
 
@@ -54,21 +62,31 @@ public class Enemy : MonoBehaviour
                 Debug.Log("Player가 아님");
                 return;
             }
-            player.PlayerDamaged(_hp);
-            EnemyDamaged(_hp);
+            bool isEnd = player.PlayerDamaged(_hp);
+            if (!isEnd)
+            {
+                EnemyDamaged(_hp);
+            }            
         }
     }
 
     void EnemyDamaged(float damage)
     {
         _hp -= damage;
-        transform.localScale = _baseScale * _scaleUp; 
+        transform.localScale = _baseScale * _scaleUp;
 
-        if (_hp <= 0)
+        if (_hp > 0)
+            return;
+
+        if (gameObject.CompareTag("Boss"))
         {
-            _itemSpawner.SpawnItem();
-            Destroy(gameObject);
+            GameManager.Instance.CallUpgradeData();
+            GameManager.Instance.PauseGame(true);
         }
+        else
+            _itemSpawner.SpawnItem();
+
+        Destroy(gameObject);
     }
 
     void EnemyMove()
