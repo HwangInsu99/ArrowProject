@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -6,11 +7,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] private string _playerLayer = "Player";
     [SerializeField] private ItemSpawner _itemSpawner;
 
-    [SerializeField] private float _hp = 50.0f;
+    public float _hp {  get; private set; } = 50.0f;
     private float _speed = 2.0f;
     private Vector3 _baseScale;
-    [SerializeField] private float _scaleUp = 1.1f;
-    [SerializeField] private float _recoverSpeed = 10.0f;
+    private float _scaleUp = 1.1f;
+    private float _recoverSpeed = 10.0f;
+
+    public event Action<float> OnDamaged;
+    public event Action<Enemy> OnDead;
 
     private void Awake()
     {
@@ -74,18 +78,20 @@ public class Enemy : MonoBehaviour
     {
         _hp -= damage;
         transform.localScale = _baseScale * _scaleUp;
+        OnDamaged?.Invoke(_hp);
 
         if (_hp > 0)
             return;
 
         if (gameObject.CompareTag("Boss"))
         {
-            GameManager.Instance.CallUpgradeData();
+            GameManager.Instance.CallUpgradeUI();
             GameManager.Instance.PauseGame(true);
         }
         else
             _itemSpawner.SpawnItem();
 
+        OnDead?.Invoke(this);
         Destroy(gameObject);
     }
 
@@ -96,6 +102,7 @@ public class Enemy : MonoBehaviour
 
     public void KillZone()
     {
+        OnDead?.Invoke(this);
         Destroy(gameObject);
     }
 }

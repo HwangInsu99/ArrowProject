@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class KillZone : MonoBehaviour
@@ -6,6 +5,7 @@ public class KillZone : MonoBehaviour
     [SerializeField] private ArrowSpawner _spawner;
     [SerializeField] private string _arrowLayer = "Arrow";
     [SerializeField] private string _enemyLayer = "Enemy";
+    [SerializeField] private string _itemLayer = "Item";
 
     private void Start()
     {
@@ -29,6 +29,13 @@ public class KillZone : MonoBehaviour
             Debug.Log("적 닿았음", this);
             Enemy enemy = other.GetComponent<Enemy>();
             enemy.KillZone();
+        }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer(_itemLayer))
+        {
+            Debug.Log("아이템 닿았음", this);
+            Item item = other.GetComponent<Item>();
+            item.KillZone();
         }
     }
 }

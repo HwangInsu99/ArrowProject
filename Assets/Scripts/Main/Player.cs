@@ -124,6 +124,7 @@ public class Player : MonoBehaviour
             case StatType.AttackRate:
                 _atkRate *= Mathf.Pow(0.9f, value);
                 _atkAniSpeed *= Mathf.Pow(1.1f, value);
+                _animator.SetFloat(_paramAtkSpeed, _atkAniSpeed);
                 break;
             case StatType.MoveSpeed:
                 _moveSpeed *= Mathf.Pow(1.1f, value);

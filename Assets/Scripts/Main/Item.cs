@@ -28,7 +28,7 @@ public class Item : MonoBehaviour
 
     void ItemMove()
     {
-        transform.position += transform.forward * _speed * Time.deltaTime;
+        transform.position -= transform.forward * _speed * Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,5 +39,10 @@ public class Item : MonoBehaviour
             player.ParameterChange(_type, _value);
             Destroy(gameObject);
         }
+    }
+
+    public void KillZone()
+    {
+        Destroy(gameObject);
     }
 }

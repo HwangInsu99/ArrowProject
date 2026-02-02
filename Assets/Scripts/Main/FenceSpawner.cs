@@ -6,7 +6,7 @@ public class FenceSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _fence;
     private float _spawnRate = 6.0f;
-    private float _spawnTimer = 1.0f;
+    private float _spawnTimer = 4.0f;
     private float _spawnDist = 3.0f;
     void Start()
     {
@@ -33,7 +33,7 @@ public class FenceSpawner : MonoBehaviour
     void SpawnFence()
     {
         Vector3 spawnPos1 = transform.position + transform.right * _spawnDist;
-        Vector3 spawnPos2 = transform.position + transform.right * -_spawnDist;
+        Vector3 spawnPos2 = transform.position + transform.right * -_spawnDist;        
 
         Instantiate(_fence, spawnPos1, Quaternion.identity);
         Instantiate(_fence, spawnPos2, Quaternion.identity);

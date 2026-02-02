@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private FenceSpawner _fenceSpawner;
+    [SerializeField] private UIManager _uiManager;
     [System.Serializable]
     public class EnemyType
     {
@@ -53,11 +54,8 @@ public class EnemySpawner : MonoBehaviour
                 _spawnBossCount--;
             }
         }
-        // 나중에 디테일 작업 때 소환 빈도 언제 보스 소환 할지 등등
     }
-    // 팬스 스포너의 다음 소환까지의 시간을 확인 에네미 스포너는 팬스를 기준으로 2초 전 / 후의 생성 시간 범위를 갖는다.
-    // Ex) 스포너의 남은 시간 +2.0  ~ 스포너의 남은 시간 + 소환주기 -4.0
-    // 보스는 스포너의 남은시간 - 2.0
+
     void SpawnEnemy(EnemyType enemy)
     {
         Vector3 spawnPos = transform.position;
@@ -67,7 +65,8 @@ public class EnemySpawner : MonoBehaviour
             spawnPos += transform.right * _setDist * dir;
         }            
 
-        Instantiate(enemy.enemy, spawnPos, Quaternion.Euler(0, 180, 0));
+        GameObject go = Instantiate(enemy.enemy, spawnPos, Quaternion.Euler(0, 180, 0));
+        _uiManager.CreateHpUI(go);
         SetSpawnTimer();
     }
 

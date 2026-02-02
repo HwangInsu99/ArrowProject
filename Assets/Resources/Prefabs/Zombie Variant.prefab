@@ -157,9 +157,6 @@ MonoBehaviour:
   _arrowLayer: Arrow
   _playerLayer: Player
   _itemSpawner: {fileID: 4420029213864609171}
-  _hp: 50
-  _scaleUp: 1.1
-  _recoverSpeed: 10
 --- !u!114 &4420029213864609171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,4 +169,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29c3166f2971bb74fb92ce0bab817ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _item: {fileID: 1137847958730444320, guid: 3f30621c66495a946a93994ad3756c38, type: 3}
+  _item: {fileID: 3131942930613651513, guid: 05d9eabb73daa9440ad681b0b88233fd, type: 3}
