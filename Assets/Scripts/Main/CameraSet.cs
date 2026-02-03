@@ -35,6 +35,10 @@ public class CameraSet : MonoBehaviour
         InitSetting();
     }
 
+    private void Update()
+    {
+        InitSetting();
+    }
     void InitSetting()
     {
         Vector3 desiredPos;

@@ -5,11 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - Boss
+  - Arrow
+  - Sword
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Arrow
+  - Attack
   - Water
   - UI
   - Enemy
