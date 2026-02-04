@@ -15,7 +15,7 @@ public class UpgradeData : MonoBehaviour
     public void RandomStat()
     {
         var enumvalue = System.Enum.GetValues(enumType: typeof(StatType));
-        _maxNum = enumvalue.Length - 2; // 선택지로 안 내보낼 종류만큼
+        _maxNum = enumvalue.Length - 6; // 선택지로 안 내보낼 종류만큼
 
         if (_maxNum < 3)
         {

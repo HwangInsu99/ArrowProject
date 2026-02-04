@@ -9,6 +9,10 @@ public enum StatType
     AttackRate,
     PlayerHp,
     ArrowRange,
+    SwordCreate,
+    SwordPower,
+    SwordRange,
+    SwordRate,
     MoveSpeed
 }
 // 아이템 + 펜스는 Power 이후의 6개만 나오므로 파워 이전에 늘어날때마다 item의 _minNum 수정
@@ -19,6 +23,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private CharacterController _controller;
     [SerializeField] private ArrowSpawner _spawner;
+    [SerializeField] private SwordManager _swordManager;
+    [SerializeField] private Finder _finder;
 
     private string _paramAtkSpeed = "fAtkSpeed";
     private string _paramAtk = "tShoot";
@@ -28,10 +34,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float _arrowSpeed = 1;
     private float _critPer = 0;
     private bool _isPenetrate = false;
-
     public float _hp { get; private set; } = 100;
     [SerializeField] private float _atkAniSpeed = 1.5f;
     [SerializeField] private float _atkRate = 1.0f;
+    [SerializeField] private float _swordPower = 1;
+
     private float _atkCool;
     [SerializeField] private float _moveSpeed = 2.0f;
     private float _maxDistance = 4.0f;
@@ -67,6 +74,23 @@ public class Player : MonoBehaviour
     {
         if (_atkCool <= 0)
             ArrowFire();
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            _swordManager.CreateSword(1, _swordPower);
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            _swordPower *= Mathf.Pow(1.1f, 1);
+            _swordManager.PowerUp(_swordPower);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            _finder.IncreasArea();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            _swordManager.SpawnRate(5);
+        }
+
+
         CharacterMove();
         _animator.SetTrigger(_paramAtk);
         _atkCool -= Time.deltaTime;
@@ -142,6 +166,19 @@ public class Player : MonoBehaviour
                 break;
             case StatType.ArrowRange:
                 _range *= Mathf.Pow(1.1f, value);
+                break;
+            case StatType.SwordCreate:
+                _swordManager.CreateSword(value, _swordPower, _finder._currentTarget);
+                break;
+            case StatType.SwordPower:
+                _swordPower *= Mathf.Pow(1.1f, value);
+                _swordManager.PowerUp(_swordPower);
+                break;
+            case StatType.SwordRange:
+                _finder.IncreasArea();
+                break;
+            case StatType.SwordRate:
+                _swordManager.SpawnRate(value);
                 break;
             case StatType.MoveSpeed:
                 _moveSpeed *= Mathf.Pow(1.1f, value);

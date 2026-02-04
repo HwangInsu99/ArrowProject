@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     private int _bossScore = 500;
     private int _genScore = 100;
     private int _dropMoney = 2;
+    private bool _isDead = false;
 
     public event Action<float> OnDamaged;
     public event Action<Enemy> OnDead;
@@ -36,7 +37,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other == null)
+        if (other == null || _isDead)
             return;
         if (other.gameObject.layer == LayerMask.NameToLayer(_attackLayer))
         {
@@ -48,9 +49,8 @@ public class Enemy : MonoBehaviour
 
                 // 나중에 시각화 할때 크리티컬 여부에 따라 데미지 색을 바꾸기 위해
                 (float damage, bool isCrit) = arrow.Damage();
-
-                EnemyDamaged(damage);
                 arrow.OnHit();
+                EnemyDamaged(damage);
             }
 
             if (other.gameObject.CompareTag("Sword"))
@@ -59,8 +59,8 @@ public class Enemy : MonoBehaviour
                 if (sword == null) return;
 
                 float damage = sword.Damage();
-                EnemyDamaged(damage);
                 sword.OnHit();
+                EnemyDamaged(damage);
             }
         }
 
@@ -83,6 +83,8 @@ public class Enemy : MonoBehaviour
 
     void EnemyDamaged(float damage)
     {
+        if (_isDead) return;
+
         _hp -= damage;
         transform.localScale = _baseScale * _scaleUp;
         OnDamaged?.Invoke(_hp);
@@ -90,6 +92,17 @@ public class Enemy : MonoBehaviour
         if (_hp > 0)
             return;
 
+        _isDead = true;
+        Break();
+    }
+
+    void EnemyMove()
+    {
+        transform.position += transform.forward * _speed * Time.deltaTime;
+    }
+
+    public void Break()
+    {
         if (gameObject.CompareTag("Boss"))
         {
             GameManager.Instance.IncreaseScore(_bossScore);
@@ -101,18 +114,7 @@ public class Enemy : MonoBehaviour
         {
             GameManager.Instance.CallItem(transform.position);
             GameManager.Instance.IncreaseScore(_genScore);
-        }            
-
-        Break();
-    }
-
-    void EnemyMove()
-    {
-        transform.position += transform.forward * _speed * Time.deltaTime;
-    }
-
-    public void Break()
-    {
+        }
         OnDead?.Invoke(this);
         Destroy(gameObject);
     }

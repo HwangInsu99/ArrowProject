@@ -80,6 +80,18 @@ public class Item : MonoBehaviour
             case StatType.MoveSpeed:
                 type = "가로 이동속도";
                 break;
+            case StatType.SwordCreate:
+                type = "검 갯수";
+                break;
+            case StatType.SwordPower:
+                type = "검 공격력";
+                break;
+            case StatType.SwordRange:
+                type = "검 사거리";
+                break;
+            case StatType.SwordRate:
+                type = "검 쿨타임감소";
+                break;
         }
         return type + " + " + _value;
     }

@@ -529,17 +529,39 @@ MonoBehaviour:
   _animator: {fileID: 101593027}
   _controller: {fileID: 101593029}
   _spawner: {fileID: 0}
+  _swordManager: {fileID: 1538501219}
+  _finder: {fileID: 101593032}
   _power: 1
   _range: 1
   _arrowSpeed: 1
   _atkAniSpeed: 1.5
   _atkRate: 1
+  _swordPower: 1
   _moveSpeed: 2
 --- !u!4 &101593031 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4142258926128110, guid: 2a038e4e49fd7f64aa727b5a60cfd55b, type: 3}
   m_PrefabInstance: {fileID: 580567403}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &101593032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101593026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b102c78c7339b864292911fdcac94857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _swordManager: {fileID: 1538501219}
+  _targetMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _targetLayer: Enemy
+  _findRadius: 8
+  _findInterval: 0.2
 --- !u!1001 &144354829
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1719,7 +1741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawner: {fileID: 995947366}
-  _arrowLayer: Arrow
+  _attackLayer: Attack
   _enemyLayer: Enemy
   _itemLayer: Item
 --- !u!1001 &423649207
@@ -2228,6 +2250,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1601037767692750, guid: 2a038e4e49fd7f64aa727b5a60cfd55b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 101593030}
+    - targetCorrespondingSourceObject: {fileID: 1601037767692750, guid: 2a038e4e49fd7f64aa727b5a60cfd55b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 101593032}
   m_SourcePrefab: {fileID: 100100000, guid: 2a038e4e49fd7f64aa727b5a60cfd55b, type: 3}
 --- !u!1 &599767439
 GameObject:
@@ -3516,7 +3541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawner: {fileID: 995947366}
-  _arrowLayer: Arrow
+  _attackLayer: Attack
   _enemyLayer: Enemy
   _itemLayer: Item
 --- !u!1 &934412775
@@ -5256,6 +5281,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1538501218}
+  - component: {fileID: 1538501219}
   m_Layer: 7
   m_Name: SwordSpawnPoint
   m_TagString: Untagged
@@ -5278,6 +5304,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 101593031}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1538501219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538501217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6791add5a53d41d4ab72befbbab6ac0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sword: {fileID: 2894800603459048462, guid: d80c5f66bb6e46f4ab3e74e040e8b4f9, type: 3}
+  _coolTime: 5
 --- !u!1001 &1642541203
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6788,7 +6828,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawner: {fileID: 995947366}
-  _arrowLayer: Arrow
+  _attackLayer: Attack
   _enemyLayer: Enemy
   _itemLayer: Item
 --- !u!4 &2084500021 stripped
@@ -6842,7 +6882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawner: {fileID: 995947366}
-  _arrowLayer: Arrow
+  _attackLayer: Attack
   _enemyLayer: Enemy
   _itemLayer: Item
 --- !u!65 &2111185341
