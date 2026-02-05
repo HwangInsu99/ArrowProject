@@ -3,17 +3,21 @@ using UnityEngine;
 
 public enum StatType
 {
-    CriticalPer,
     ArrowPower,
     ArrowSpeed,
     AttackRate,
-    PlayerHp,
     ArrowRange,
+    PlayerHp,
     SwordCreate,
     SwordPower,
     SwordRange,
     SwordRate,
-    MoveSpeed
+    MoveSpeed,
+    CriticalPer,
+    BloodSuck,
+    SpeedDamage,
+    SummonPet,
+    ArmorUp
 }
 // 아이템 + 펜스는 Power 이후의 6개만 나오므로 파워 이전에 늘어날때마다 item의 _minNum 수정
 // 선택지에 안내보낼 것들은 가장 뒤로
@@ -25,23 +29,29 @@ public class Player : MonoBehaviour
     [SerializeField] private ArrowSpawner _spawner;
     [SerializeField] private SwordManager _swordManager;
     [SerializeField] private Finder _finder;
+    [SerializeField] private PetSpawner _petSpawner;
 
     private string _paramAtkSpeed = "fAtkSpeed";
     private string _paramAtk = "tShoot";
 
+    private float _arrowPower;
     [SerializeField] private float _power = 1;
+    [SerializeField] private float _speedPower = 1;
     [SerializeField] private float _range = 1;
     [SerializeField] private float _arrowSpeed = 1;
-    private float _critPer = 0;
+    private float _critPer = 0.0f;
+    private float _healPer = 0.0f;
+    private float _speedPowerPer = 0.0f;
     private bool _isPenetrate = false;
     public float _hp { get; private set; } = 100;
     [SerializeField] private float _atkAniSpeed = 1.5f;
     [SerializeField] private float _atkRate = 1.0f;
     [SerializeField] private float _swordPower = 1;
-
     private float _atkCool;
     [SerializeField] private float _moveSpeed = 2.0f;
     private float _maxDistance = 4.0f;
+    private float _armor;
+    private float _reduceDamage;
     private Vector3 _startPos;
     public bool _isMaxSpeed { get; private set; } = false;
 
@@ -74,22 +84,6 @@ public class Player : MonoBehaviour
     {
         if (_atkCool <= 0)
             ArrowFire();
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            _swordManager.CreateSword(1, _swordPower);
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            _swordPower *= Mathf.Pow(1.1f, 1);
-            _swordManager.PowerUp(_swordPower);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            _finder.IncreasArea();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            _swordManager.SpawnRate(5);
-        }
-
 
         CharacterMove();
         _animator.SetTrigger(_paramAtk);
@@ -118,13 +112,13 @@ public class Player : MonoBehaviour
 
     void ArrowFire()
     {
-        _spawner.SpawnArrow(_arrowSpeed, _range, _power, _critPer, _isPenetrate);
+        _spawner.SpawnArrow(_arrowSpeed, _range, _arrowPower, _critPer, _isPenetrate);
         _atkCool = _atkRate;
     }
 
     public bool PlayerDamaged(float damage)
     {
-        _hp -= damage;
+        _hp -= damage * _reduceDamage;
         OnDamaged?.Invoke(_hp);
 
         if ( _hp <= 0)
@@ -147,11 +141,9 @@ public class Player : MonoBehaviour
         // 나중에 이동속도 같은거에는 최소 최댓값 Clamp 설정하기
         switch (type)
         {
-            case StatType.CriticalPer:
-                _critPer += value;
-                break;
             case StatType.ArrowPower:
                 _power *= Mathf.Pow(1.1f, value);
+                CalcPower();
                 break;
             case StatType.AttackRate:
                 _atkRate *= Mathf.Pow(0.9f, value);
@@ -188,6 +180,27 @@ public class Player : MonoBehaviour
                     _isMaxSpeed = true;
                 }
                 break;
+            case StatType.CriticalPer:
+                _critPer += value;
+                break;
+            case StatType.BloodSuck:
+                _healPer += value;
+                break;
+            case StatType.SpeedDamage:
+                _speedPowerPer += value;
+                _speedPower = _arrowSpeed * (_speedPowerPer * 0.01f);
+                CalcPower();
+                break;
+            case StatType.SummonPet:
+                _petSpawner.SpawnPet(value, transform);
+                break;
+            case StatType.ArmorUp:
+                _armor += value;
+                _reduceDamage = 1 - _armor * 0.01f;
+                _reduceDamage = Mathf.Clamp(_reduceDamage, 0.5f, 1.0f);
+                break;
         }
     }
+
+    void CalcPower() => _arrowPower = _power * _speedPower;
 }

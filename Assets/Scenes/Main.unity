@@ -531,7 +531,9 @@ MonoBehaviour:
   _spawner: {fileID: 0}
   _swordManager: {fileID: 1538501219}
   _finder: {fileID: 101593032}
+  _petSpawner: {fileID: 0}
   _power: 1
+  _speedPower: 1
   _range: 1
   _arrowSpeed: 1
   _atkAniSpeed: 1.5
@@ -5283,7 +5285,7 @@ GameObject:
   - component: {fileID: 1538501218}
   - component: {fileID: 1538501219}
   m_Layer: 7
-  m_Name: SwordSpawnPoint
+  m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

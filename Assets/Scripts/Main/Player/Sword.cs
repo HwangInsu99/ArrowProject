@@ -92,10 +92,7 @@ public class Sword : MonoBehaviour
         _myManager.ReturnPool(gameObject, isRest);
     }
 
-    public float Damage()
-    {
-        return _damage;
-    }
+    public float Damage() => _damage;
 
     public void OnHit()
     {
