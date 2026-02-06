@@ -1,43 +1,52 @@
-using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
+
+[System.Serializable]
+public struct StatInfo
+{
+    public StatType type;
+    public int value;
+}
 
 public class UpgradeData : MonoBehaviour
 {
-    [System.Serializable]
-    public class Upgrade
-    {
-        public UpgradeButton button;
-    }
-    public Upgrade[] button;
+    [SerializeField] private UpgradeButton[] _buttons = new UpgradeButton[3];
+    [SerializeField] private UpgradeDataSO[] _statDatas;
     
-    private int _maxNum;
-
     public void RandomStat()
     {
-        var enumvalue = System.Enum.GetValues(enumType: typeof(StatType));
-        _maxNum = enumvalue.Length - 6; // 선택지로 안 내보낼 종류만큼
-
-        if (_maxNum < 3)
+        if (_statDatas.Length < 3)
         {
-            Debug.LogError("선택지 갯수 부족 Player에서 enum 갯수 확인");
+            Debug.LogError("저장된 데이터 부족");
             return;
         }
 
-        StatType[] type = new StatType[3];
-        for (int i = 0; i < type.Length;)
+        int rank = RandomRank();
+        int count = 0;
+
+        foreach (UpgradeDataSO data in _statDatas)
         {
-            StatType now = (StatType)enumvalue.GetValue(Random.Range(0, _maxNum));
-            if (!type.Contains(now)){
-                type[i] = now;
-                i++;
-            }
+            if (data.Rank == rank)
+                count++;
         }
 
-        for (int i = 0; i < type.Length; i++)
+        if (count < _buttons.Length)
         {
-            int rank = RandomRank();
-            int value = StatValue(type[i], rank);
-            button[i].button.SetParameterValue(type[i], rank, value);
+            Debug.LogError($"랭크{rank} 데이터 부족");
+            return;
+        }
+        List<UpgradeDataSO> pool = new List<UpgradeDataSO>(_statDatas);
+        
+        for (int i = 0;  i < _buttons.Length;)
+        {
+            int rand = Random.Range(0, pool.Count);
+            // 확정된 랭크가 아니면 재선택 하면서 이번 값 삭제
+            if (pool[rand].Rank == rank)
+            {
+                _buttons[i].SetParameterValue(pool[rand]);
+                i++;
+            }
+            pool.RemoveAt(rand);
         }
     }
 
@@ -56,105 +65,5 @@ public class UpgradeData : MonoBehaviour
         else
             return 1;
 
-    }
-
-    int StatValue(StatType type, int rank)
-    {
-        int returnNum = 0;
-        switch (type)
-        {
-            case StatType.ArrowPower:
-                returnNum = PowerRank(rank);
-                break;
-            case StatType.ArrowRange:
-                returnNum = RangeRank(rank);
-                break;
-            case StatType.ArrowSpeed:
-                returnNum = SpeedRank(rank);
-                break;
-            case StatType.AttackRate:
-                returnNum = AttackRateRank(rank);
-                break;
-            case StatType.MoveSpeed:
-                returnNum = MoveSpeedRank(rank);
-                break;
-            case StatType.PlayerHp:
-                returnNum = HpRank(rank);
-                break;
-            case StatType.CriticalPer:
-                returnNum = CritPerRank(rank);
-                break;
-        }
-        return returnNum;
-    }
-
-    int PowerRank(int rank)
-    {
-        if (rank == 3)
-            return 9;
-        else if (rank == 2)
-            return 5;
-        else
-            return 2;
-    }
-
-    int RangeRank(int rank)
-    {
-        if (rank == 3)
-            return 10;
-        else if (rank == 2)
-            return 7;
-        else
-            return 3;
-    }
-
-    int SpeedRank(int rank)
-    {
-        if (rank == 3)
-            return 9;
-        else if (rank == 2)
-            return 5;
-        else
-            return 2;
-    }
-
-    int AttackRateRank(int rank)
-    {
-        if (rank == 3)
-            return 7;
-        else if (rank == 2)
-            return 5;
-        else
-            return 3;
-    }
-
-    int MoveSpeedRank(int rank)
-    {
-        if (rank == 3)
-            return 12;
-        else if (rank == 2)
-            return 7;
-        else
-            return 4;
-    }
-
-    int HpRank(int rank)
-    {
-        if (rank == 3)
-            return 16;
-        else if (rank == 2)
-            return 9;
-        else
-            return 3;
-    }
-
-    int CritPerRank(int rank)
-    {
-        if (rank == 3)
-            return 12;
-        else if (rank == 2)
-            return 10;
-        else
-            return 8;
     }
 }

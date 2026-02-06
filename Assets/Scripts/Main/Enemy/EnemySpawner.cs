@@ -20,6 +20,8 @@ public class EnemySpawner : MonoBehaviour
     private float _spawnTimer;
     private int _spawnBossCount = 2;
     private int _nextBossCount = 6;
+    private float _standardHp = 50;
+    private int _section;
 
     void Start()
     {
@@ -47,6 +49,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 SpawnEnemy(_enemyType[1]);
                 _spawnBossCount = _nextBossCount;
+                SectionChange();
             }
             else
             {
@@ -66,6 +69,7 @@ public class EnemySpawner : MonoBehaviour
         }            
 
         GameObject go = Instantiate(enemy.enemy, spawnPos, Quaternion.Euler(0, 180, 0));
+        go.GetComponent<Enemy>().SetHp(_standardHp, _section);
         GameManager.Instance.CallHpUI(go);
         SetSpawnTimer();
     }
@@ -87,5 +91,11 @@ public class EnemySpawner : MonoBehaviour
         _minTime = time + 0.5f;
         _maxTime = time + 4.0f;
         _spawnTimer = Random.Range(_minTime, _maxTime);
+    }
+
+    void SectionChange()
+    {
+        _section++;
+        _standardHp += _section * 100.0f;
     }
 }

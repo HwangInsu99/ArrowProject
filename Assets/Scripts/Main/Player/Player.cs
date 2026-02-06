@@ -12,6 +12,7 @@ public enum StatType
     SwordPower,
     SwordRange,
     SwordRate,
+    SwordSpeed,
     MoveSpeed,
     CriticalPer,
     BloodSuck,
@@ -39,6 +40,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _speedPower = 1;
     [SerializeField] private float _range = 1;
     [SerializeField] private float _arrowSpeed = 1;
+    [SerializeField] private float _swordSpeed = 1;
     private float _critPer = 0.0f;
     private float _healPer = 0.0f;
     private float _speedPowerPer = 0.0f;
@@ -51,7 +53,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _moveSpeed = 2.0f;
     private float _maxDistance = 4.0f;
     private float _armor;
-    private float _reduceDamage;
+    private float _reduceDamage = 1.0f;
     private Vector3 _startPos;
     public bool _isMaxSpeed { get; private set; } = false;
 
@@ -78,6 +80,7 @@ public class Player : MonoBehaviour
     {
         _animator.SetFloat(_paramAtkSpeed, _atkAniSpeed);
         _startPos = transform.position;
+        CalcPower();
     }
 
     void Update()
@@ -136,6 +139,14 @@ public class Player : MonoBehaviour
         GameManager.Instance.PauseGame(true);
     }
 
+    public void DataAnalyze(UpgradeDataSO data)
+    {
+        foreach (var bundle in data.Infos)
+        {
+            ParameterChange(bundle.type, bundle.value);
+        }
+    }
+
     public void ParameterChange(StatType type, int value)
     {
         // 나중에 이동속도 같은거에는 최소 최댓값 Clamp 설정하기
@@ -152,6 +163,7 @@ public class Player : MonoBehaviour
                 break;
             case StatType.ArrowSpeed:
                 _arrowSpeed *= Mathf.Pow(1.1f, value);
+                CalcPower();
                 break;
             case StatType.PlayerHp:
                 _hp += value;
@@ -160,7 +172,7 @@ public class Player : MonoBehaviour
                 _range *= Mathf.Pow(1.1f, value);
                 break;
             case StatType.SwordCreate:
-                _swordManager.CreateSword(value, _swordPower, _finder._currentTarget);
+                _swordManager.CreateSword(value, _swordPower, _swordSpeed, _finder._currentTarget);
                 break;
             case StatType.SwordPower:
                 _swordPower *= Mathf.Pow(1.1f, value);
@@ -171,6 +183,10 @@ public class Player : MonoBehaviour
                 break;
             case StatType.SwordRate:
                 _swordManager.SpawnRate(value);
+                break;
+            case StatType.SwordSpeed:
+                _swordSpeed *= Mathf.Pow(1.1f, value);
+                _swordManager.SetSpeed(_swordSpeed);
                 break;
             case StatType.MoveSpeed:
                 _moveSpeed *= Mathf.Pow(1.1f, value);
@@ -196,7 +212,7 @@ public class Player : MonoBehaviour
                 break;
             case StatType.ArmorUp:
                 _armor += value;
-                _reduceDamage = 1 - _armor * 0.01f;
+                _reduceDamage -= _armor * 0.01f;
                 _reduceDamage = Mathf.Clamp(_reduceDamage, 0.5f, 1.0f);
                 break;
         }

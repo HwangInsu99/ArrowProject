@@ -24,6 +24,18 @@ public class Enemy : MonoBehaviour
         _baseScale = transform.localScale;
     }
 
+    public void SetHp(float standard, int section)
+    {
+        float multiplier;
+        multiplier = UnityEngine.Random.Range(0.7f, 1.3f);
+        if (gameObject.CompareTag("Boss"))
+        {
+            multiplier = UnityEngine.Random.Range(0.8f, 1.4f);
+            standard += section * 100;
+        }
+        _hp = standard * multiplier;
+    }
+
     void Update()
     {
         EnemyMove();

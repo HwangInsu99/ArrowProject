@@ -33,7 +33,7 @@ public class SwordManager : MonoBehaviour
         }
     }
 
-    public void CreateSword(int num, float power, Transform target)
+    public void CreateSword(int num, float power, float speed, Transform target)
     {
         for (int i = 0; i < num; i++)
         {
@@ -44,6 +44,7 @@ public class SwordManager : MonoBehaviour
                 sword.transform.localPosition = Vector3.left;
             Sword scSword = sword.GetComponent<Sword>();
             scSword.SetDamage(power);
+            scSword.SetSpeed(speed);
             _swords.Add(scSword);
             if (target != null)
                 scSword.SetTarget(target);
@@ -55,6 +56,13 @@ public class SwordManager : MonoBehaviour
         if (_swords.Count == 0) return;
         foreach (Sword sword in _swords)
             sword.SetDamage(power);
+    }
+
+    public void SetSpeed(float speed)
+    {
+        if (_swords.Count == 0) return;
+        foreach (Sword sword in _swords)
+            sword.SetSpeed(speed);
     }
 
     public void SendTarget(Transform target)

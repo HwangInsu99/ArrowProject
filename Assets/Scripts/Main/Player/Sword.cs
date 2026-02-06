@@ -14,7 +14,8 @@ public class Sword : MonoBehaviour
     [SerializeField] private SwordManager _myManager;
 
     private float _baseDamage = 15.0f;
-    [SerializeField] private float _damage;
+    private float _baseSpeed = 5.0f;
+    private float _damage;
     private float _speed = 5.0f;
     private float _spreadValue = 0.5f;
     private float _coolTimer;
@@ -70,6 +71,11 @@ public class Sword : MonoBehaviour
     public void SetDamage(float damage)
     {
         _damage = _baseDamage * damage;
+    }
+
+    public void SetSpeed(float speed)
+    {
+        _speed = _baseSpeed * speed;
     }
 
     public void SetTarget(Transform target)

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9520aaca7a0c72c4ca879023f0a647dd, type: 3}
+  m_Name: SwordPower3
+  m_EditorClassIdentifier: 
+  _rank: 3
+  _explain: "\uAC80 \uACF5\uACA9\uB825 + 6\n\uAC80 \uCFE8\uD0C0\uC784\uAC10\uC18C
+    + 1\n\uAC80 \uC18D\uB3C4 + 2"
+  _info:
+  - type: 6
+    value: 6
+  - type: 8
+    value: 1
+  - type: 9
+    value: 2

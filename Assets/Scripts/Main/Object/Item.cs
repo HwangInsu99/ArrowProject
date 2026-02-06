@@ -8,7 +8,6 @@ public class Item : MonoBehaviour
     private float _speed = 2.0f;
     private StatType _type;
     private int _value;
-    private int _minNum = 1;
     private int _maxNum;
     public bool _isMaxSpeed;
 
@@ -27,12 +26,12 @@ public class Item : MonoBehaviour
     void SetStatus()
     {
         var enumvalue = Enum.GetValues(enumType: typeof(StatType));
-        _maxNum = enumvalue.Length;
+        _maxNum = enumvalue.Length - 5;
 
-        if (_isMaxSpeed) _maxNum -= 1;
+        if (_isMaxSpeed) _maxNum--;
 
-        _type = (StatType)enumvalue.GetValue(UnityEngine.Random.Range(_minNum, _maxNum));
-        _value = UnityEngine.Random.Range(1, 6);
+        _type = (StatType)enumvalue.GetValue(UnityEngine.Random.Range(0, _maxNum));
+        _value = UnityEngine.Random.Range(1, 5);
         _value = _type == StatType.PlayerHp ? _value * 50 : _value;
     }
 
@@ -91,6 +90,9 @@ public class Item : MonoBehaviour
                 break;
             case StatType.SwordRate:
                 type = "검 쿨타임감소";
+                break;
+            case StatType.SwordSpeed:
+                type = "검 속도";
                 break;
         }
         return type + " + " + _value;
