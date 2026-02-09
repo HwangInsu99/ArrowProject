@@ -8,6 +8,9 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _text;
 
     private UpgradeDataSO _data;
+    private float _hpValue;
+    private bool _hasHpType;
+
     void Start()
     {
         Button button = GetComponent<Button>();
@@ -16,7 +19,15 @@ public class UpgradeButton : MonoBehaviour
 
     public void SetParameterValue(UpgradeDataSO dataBundle)
     {
+        _hasHpType = false;
         _data = dataBundle;
+        if(_data.Infos.Count == 1 && _data.Infos[0].type == StatType.PlayerHp)
+        {
+            _hpValue = _data.HpValue();
+            _text.text = $"Grade : {_data.Rank}\n{_data.Explain}{_hpValue}";
+            _hasHpType = true;
+            return;
+        }
         _text.text = $"Grade : {_data.Rank}\n{_data.Explain}";
     }
 
@@ -24,8 +35,12 @@ public class UpgradeButton : MonoBehaviour
     {
         if (_data == null)
             return;
-
-        _player.DataAnalyze(_data);
+        if (_hasHpType)
+        {
+            _player.ParameterChange(StatType.PlayerHp, _hpValue);
+        }
+        else
+            _player.DataAnalyze(_data);
         GameManager.Instance.CompleteUpgrade();
     }
 }

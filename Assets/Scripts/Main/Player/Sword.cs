@@ -85,6 +85,7 @@ public class Sword : MonoBehaviour
         {
             _state = State.Chase;
             transform.SetParent(null);
+            SoundManager.Instance.PlaySfx(SfxType.Sword);
         }
     }
 

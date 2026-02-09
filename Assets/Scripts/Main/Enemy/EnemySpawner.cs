@@ -32,6 +32,7 @@ public class EnemySpawner : MonoBehaviour
         }
 
         SpawnEnemy(_enemyType[0]);
+        GameManager.Instance.ChangeEnemyBaseHP(_standardHp);
     }
 
     void Update()
@@ -97,5 +98,6 @@ public class EnemySpawner : MonoBehaviour
     {
         _section++;
         _standardHp += _section * 100.0f;
+        GameManager.Instance.ChangeEnemyBaseHP(_standardHp);
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public struct StatInfo
 {
     public StatType type;
-    public int value;
+    public float value;
 }
 
 public class UpgradeData : MonoBehaviour

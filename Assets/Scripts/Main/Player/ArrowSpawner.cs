@@ -48,6 +48,7 @@ public class ArrowSpawner : MonoBehaviour
         }
         arrow.transform.SetParent(null);
         arrow.SetActive(true);
+        SoundManager.Instance.PlaySfx(SfxType.Arrow);
     }
 
     public void DespawnArrow(GameObject arrow)

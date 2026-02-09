@@ -111,6 +111,7 @@ public class Enemy : MonoBehaviour
         _hp -= damage;
         transform.localScale = _baseScale * _scaleUp;
         OnDamaged?.Invoke(_hp);
+        SoundManager.Instance.PlaySfx(SfxType.EnemyHit);
 
         if (_hp > 0)
             return;

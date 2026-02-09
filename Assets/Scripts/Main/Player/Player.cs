@@ -20,8 +20,6 @@ public enum StatType
     SummonPet,
     ArmorUp
 }
-// 아이템 + 펜스는 Power 이후의 6개만 나오므로 파워 이전에 늘어날때마다 item의 _minNum 수정
-// 선택지에 안내보낼 것들은 가장 뒤로
 
 public class Player : MonoBehaviour
 {
@@ -149,7 +147,6 @@ public class Player : MonoBehaviour
 
     public void ParameterChange(StatType type, float value)
     {
-        // 나중에 이동속도 같은거에는 최소 최댓값 Clamp 설정하기
         switch (type)
         {
             case StatType.ArrowPower:

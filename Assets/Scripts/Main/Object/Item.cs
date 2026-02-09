@@ -7,7 +7,7 @@ public class Item : MonoBehaviour
 
     private float _speed = 2.0f;
     private StatType _type;
-    private int _value;
+    private float _value;
     private int _maxNum;
     public bool _isMaxSpeed;
 
@@ -32,12 +32,41 @@ public class Item : MonoBehaviour
 
         _type = (StatType)enumvalue.GetValue(UnityEngine.Random.Range(0, _maxNum));
         _value = UnityEngine.Random.Range(1, 5);
+        if (_type == StatType.PlayerHp)
+            HpValueSet(_value);
         _value = _type == StatType.PlayerHp ? _value * 50 : _value;
     }
 
     void ItemMove()
     {
         transform.position -= transform.forward * _speed * Time.deltaTime;
+    }
+
+    void HpValueSet(float value)
+    {
+        float min = 0;
+        float max = 0;        
+        switch (value)
+        {
+            case 1:
+                min = 0.5f;
+                max = 1.0f;
+                break;
+            case 2:
+                min = 1.1f;
+                max = 1.5f;
+                break;
+            case 3:
+                min = 1.8f;
+                max = 2.2f;
+                break;
+            case 4:
+                min = 2.8f;
+                max = 3.5f;
+                break;
+        }
+        float result = UnityEngine.Random.Range(min, max);
+        _value = GameManager.Instance._enemyBaseHp * result;
     }
 
     private void OnTriggerEnter(Collider other)

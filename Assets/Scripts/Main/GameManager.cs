@@ -1,11 +1,11 @@
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
-{
-    public static GameManager Instance { get; private set; }
+{    public static GameManager Instance { get; private set; }
     [SerializeField] private UIManager _uiManager;
     [SerializeField] private ItemSpawner _itemSpawner;
     [SerializeField] private Player _player;
+    public float _enemyBaseHp { get; private set; }
     void Awake()
     {
         Instance = this;
@@ -58,4 +58,6 @@ public class GameManager : MonoBehaviour
     {
         _player.ParameterChange(StatType.PlayerHp, suck);
     }
+
+    public void ChangeEnemyBaseHP(float hp) => _enemyBaseHp = hp;
 }
