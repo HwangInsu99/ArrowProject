@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     [SerializeField] private UIManager _uiManager;
     [SerializeField] private ItemSpawner _itemSpawner;
+    [SerializeField] private Player _player;
     void Awake()
     {
         Instance = this;
@@ -51,5 +52,10 @@ public class GameManager : MonoBehaviour
     {
         GameData.Instance.IncreaseMoney(money);
         _uiManager.CallMoney();
+    }
+
+    public void BloodSuck(float suck)
+    {
+        _player.ParameterChange(StatType.PlayerHp, suck);
     }
 }

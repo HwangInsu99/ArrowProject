@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,9 +10,17 @@ public class Pet : MonoBehaviour
     private float _moveSpeed = 2.0f;
     private float _fireRate = 3.0f;
     private float _coolTime;
+    private int _startPool = 3;
 
+    private readonly Queue<GameObject> _pool = new Queue<GameObject>();
+
+    // 파티클 3개정도가 동시에 존재하니까 4개를 만들면 될듯
     void Start()
     {
+        for (int i = 0; i < _startPool; i++)
+        {
+            AddPool();
+        }
         float xPos = Random.Range(-3.0f, 3.0f);
         _offset = new Vector3(xPos, 1, 0);
         transform.position += _offset;
@@ -36,7 +43,7 @@ public class Pet : MonoBehaviour
             return;
 
         Vector3 targetPos = _player.position + _offset;
-        targetPos.x = Mathf.Clamp(transform.position.x, -4.0f, 4.0f);
+        targetPos.x = Mathf.Clamp(targetPos.x, -4.0f, 4.0f);
 
         transform.position = Vector3.Lerp
             (
@@ -44,6 +51,13 @@ public class Pet : MonoBehaviour
                 targetPos,
                 _moveSpeed * Time.deltaTime
             );
+    }
+
+    void AddPool()
+    {
+        GameObject fire = Instantiate(_firePrefab, transform);
+        fire.SetActive(false);
+        _pool.Enqueue(fire);
     }
 
     public void SetParam(float damage, Transform target, GameObject prefab)
@@ -55,9 +69,22 @@ public class Pet : MonoBehaviour
 
     void Attack()
     {
+        if (_pool.Count <= 0)
+        {
+            AddPool();
+        }
         _coolTime = _fireRate;
-        GameObject fire = Instantiate(_firePrefab);
+        GameObject fire = _pool.Dequeue();
         PetFire scFire = fire.GetComponent<PetFire>();
         scFire.SetDamage(_damage);
+        fire.transform.SetParent(null);
+        fire.SetActive(true);
+    }
+
+    public void DespawnFire(GameObject fire)
+    {
+        fire.transform.SetParent(transform);
+        fire.SetActive(false);
+        _pool.Enqueue(fire);
     }
 }

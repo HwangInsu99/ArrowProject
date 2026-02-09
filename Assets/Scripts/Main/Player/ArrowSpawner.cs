@@ -1,14 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ArrowSpawner : MonoBehaviour
 {
-    public interface ISpawnListener
-    {
-        void SetStatus(float speed, float distance, float damage, float crit, bool penetrate, Transform point);
-    }
-
     [System.Serializable]
     public class ArrowType
     {
@@ -40,7 +34,7 @@ public class ArrowSpawner : MonoBehaviour
         _pool.Enqueue(arrow);
     }
 
-    public void SpawnArrow(float speed, float distance, float damage, float crit, bool penetrate)
+    public void SpawnArrow(float speed, float distance, float damage, float crit, float suck, bool penetrate)
     {
         if (_pool.Count <= 0)
         {
@@ -50,7 +44,7 @@ public class ArrowSpawner : MonoBehaviour
         Arrow script = arrow.GetComponent<Arrow>();
         if (script != null)
         {
-            script.SetStatus(speed, distance, damage, crit, penetrate, transform);
+            script.SetStatus(speed, distance, damage, crit, suck, penetrate, transform);
         }
         arrow.transform.SetParent(null);
         arrow.SetActive(true);

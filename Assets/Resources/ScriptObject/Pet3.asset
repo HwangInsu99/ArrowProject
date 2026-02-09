@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pet3
   m_EditorClassIdentifier: 
   _rank: 3
-  _explain: "\uACF5\uACA9\uB825 : 750"
+  _explain: "\uC18C\uD658\uC218\n\uACF5\uACA9\uB825 : 750"
   _info:
   - type: 14
-    value: 750
+    value: 3

@@ -32,7 +32,7 @@ public class HpUI : MonoBehaviour
     void SetHpUI(Player player)
     {
         Debug.Log("플레이어 연결");
-        player.OnDamaged += ChangeHp;
+        player.OnHpChanged += ChangeHp;
         player.OnDead += Release;
         ChangeHp(player._hp);
     }
@@ -60,7 +60,7 @@ public class HpUI : MonoBehaviour
 
     void Release(Player player)
     {
-        player.OnDamaged -= ChangeHp;
+        player.OnHpChanged -= ChangeHp;
         player.OnDead -= Release;
         Destroy(gameObject);
     }

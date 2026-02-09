@@ -15,7 +15,7 @@ public class PetSpawner : MonoBehaviour
         else if (value == 3)
             damage = 750;
 
-        GameObject pet = Instantiate(_pet[value - 1]);
+        GameObject pet = Instantiate(_pet[value - 1], transform);
         Pet scPet = pet.GetComponent<Pet>();
         scPet.SetParam(damage, player, _firePrefab);
     }

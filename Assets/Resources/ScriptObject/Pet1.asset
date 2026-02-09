@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pet1
   m_EditorClassIdentifier: 
   _rank: 1
-  _explain: "\uACF5\uACA9\uB825 : 60"
+  _explain: "\uC18C\uD658\uC218\n\uACF5\uACA9\uB825 : 60"
   _info:
   - type: 14
-    value: 60
+    value: 1

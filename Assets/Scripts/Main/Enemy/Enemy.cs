@@ -65,6 +65,17 @@ public class Enemy : MonoBehaviour
                 EnemyDamaged(damage);
             }
 
+            if (other.gameObject.CompareTag("Fire"))
+            {
+                PetFire fire = other.GetComponent<PetFire>();
+                if (fire == null)
+                    return;
+
+                float damage = fire.Damage();
+                fire.Despawn();
+                EnemyDamaged(damage);
+            }
+
             if (other.gameObject.CompareTag("Sword"))
             {
                 Sword sword = other.GetComponent<Sword>();
@@ -104,17 +115,6 @@ public class Enemy : MonoBehaviour
         if (_hp > 0)
             return;
 
-        _isDead = true;
-        Break();
-    }
-
-    void EnemyMove()
-    {
-        transform.position += transform.forward * _speed * Time.deltaTime;
-    }
-
-    public void Break()
-    {
         if (gameObject.CompareTag("Boss"))
         {
             GameManager.Instance.IncreaseScore(_bossScore);
@@ -127,6 +127,18 @@ public class Enemy : MonoBehaviour
             GameManager.Instance.CallItem(transform.position);
             GameManager.Instance.IncreaseScore(_genScore);
         }
+
+        _isDead = true;
+        Break();
+    }
+
+    void EnemyMove()
+    {
+        transform.position += transform.forward * _speed * Time.deltaTime;
+    }
+
+    public void Break()
+    {        
         OnDead?.Invoke(this);
         Destroy(gameObject);
     }

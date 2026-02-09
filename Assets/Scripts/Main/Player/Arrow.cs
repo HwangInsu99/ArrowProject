@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Arrow : MonoBehaviour, ArrowSpawner.ISpawnListener
+public class Arrow : MonoBehaviour
 {
     [SerializeField] private ArrowSpawner _mySpawner;
 
@@ -13,6 +13,7 @@ public class Arrow : MonoBehaviour, ArrowSpawner.ISpawnListener
     private float _remainDistance;
     private float _damage;
     private float _critPer = 0.0f;
+    private float _suckPer = 0.0f;
 
     bool _isPenetrate = false;
 
@@ -28,12 +29,13 @@ public class Arrow : MonoBehaviour, ArrowSpawner.ISpawnListener
             _mySpawner.DespawnArrow(gameObject);
     }
 
-    public void SetStatus(float speed, float distance, float damage, float crit, bool penetrate, Transform point)
+    public void SetStatus(float speed, float distance, float damage, float crit, float suck, bool penetrate, Transform point)
     {
         _speed = _baseSpeed * speed;
         _maxDistance = _baseDistance * distance;
         _damage = _baseDamage * damage;
         _critPer = crit;
+        _suckPer = suck;
         _isPenetrate = penetrate;
         transform.position = point.position;
         _remainDistance = _maxDistance;
@@ -57,6 +59,8 @@ public class Arrow : MonoBehaviour, ArrowSpawner.ISpawnListener
     {
         bool isCrit = CriticalAttack(_critPer);
         float arrowDamage = isCrit ? _damage * 2 : _damage;
+        if (_suckPer > 0.0f)
+            GameManager.Instance.BloodSuck(arrowDamage * _suckPer * 0.01f);
         return (arrowDamage, isCrit);
     }
 

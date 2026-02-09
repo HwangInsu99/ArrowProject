@@ -21,7 +21,14 @@ public class KillZone : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer(_attackLayer))
         {
             Debug.Log("투사체 닿았음", this);
-            _spawner.DespawnArrow(other.gameObject);
+            if (other.gameObject.CompareTag("Arrow"))
+            {
+                _spawner.DespawnArrow(other.gameObject);
+            }
+            else if (other.gameObject.CompareTag("Fire"))
+            {
+                other.GetComponent<PetFire>().Despawn();
+            }
         }
 
         if (other.gameObject.layer == LayerMask.NameToLayer(_enemyLayer))

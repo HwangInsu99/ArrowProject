@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pet2
   m_EditorClassIdentifier: 
   _rank: 2
-  _explain: "\uACF5\uACA9\uB825 : 200"
+  _explain: "\uC18C\uD658\uC218\n\uACF5\uACA9\uB825 : 200"
   _info:
   - type: 14
-    value: 200
+    value: 2
