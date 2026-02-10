@@ -84,6 +84,7 @@ public class Pet : MonoBehaviour
     public void DespawnFire(GameObject fire)
     {
         fire.transform.SetParent(transform);
+        fire.transform.localPosition = Vector3.zero;
         fire.SetActive(false);
         _pool.Enqueue(fire);
     }

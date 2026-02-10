@@ -23,7 +23,7 @@ public class UpgradeButton : MonoBehaviour
         _data = dataBundle;
         if(_data.Infos.Count == 1 && _data.Infos[0].type == StatType.PlayerHp)
         {
-            _hpValue = _data.HpValue();
+            _hpValue = Mathf.FloorToInt(_data.HpValue());
             _text.text = $"Grade : {_data.Rank}\n{_data.Explain}{_hpValue}";
             _hasHpType = true;
             return;

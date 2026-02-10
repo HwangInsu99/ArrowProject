@@ -27,7 +27,8 @@ public class KillZone : MonoBehaviour
             }
             else if (other.gameObject.CompareTag("Fire"))
             {
-                other.GetComponent<PetFire>().Despawn();
+                PetFire fire = other.GetComponent<PetFire>();
+                fire.Despawn();
             }
         }
 

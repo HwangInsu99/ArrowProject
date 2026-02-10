@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
     private int _genScore = 100;
     private int _dropMoney = 2;
     private bool _isDead = false;
+    private float _hitSoundCool = 0.15f;
+    private float _hitSoundTimer;
 
     public event Action<float> OnDamaged;
     public event Action<Enemy> OnDead;
@@ -38,6 +40,8 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        if (_hitSoundTimer > 0)
+            _hitSoundTimer -= Time.deltaTime;
         EnemyMove();
         transform.localScale = Vector3.Lerp
             (
@@ -111,7 +115,11 @@ public class Enemy : MonoBehaviour
         _hp -= damage;
         transform.localScale = _baseScale * _scaleUp;
         OnDamaged?.Invoke(_hp);
-        SoundManager.Instance.PlaySfx(SfxType.EnemyHit);
+        if (_hitSoundTimer > 0)
+        {
+            _hitSoundTimer = _hitSoundCool;
+            SoundManager.Instance.PlaySfx(SfxType.EnemyHit);
+        }        
 
         if (_hp > 0)
             return;

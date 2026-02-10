@@ -26,11 +26,6 @@ public class Sword : MonoBehaviour
         _myManager = GetComponentInParent<SwordManager>();
     }
 
-    void Start()
-    {
-        Init();
-    }
-
     void OnEnable()
     {
         Init();
@@ -58,6 +53,7 @@ public class Sword : MonoBehaviour
         {
             _state = State.Chase;
             transform.SetParent(null);
+            SoundManager.Instance.PlaySfx(SfxType.Sword);
         }
     }
 

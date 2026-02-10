@@ -31,15 +31,33 @@ public class Item : MonoBehaviour
         if (_isMaxSpeed) _maxNum--;
 
         _type = (StatType)enumvalue.GetValue(UnityEngine.Random.Range(0, _maxNum));
-        _value = UnityEngine.Random.Range(1, 5);
+        _value = RandomRank();
         if (_type == StatType.PlayerHp)
             HpValueSet(_value);
-        _value = _type == StatType.PlayerHp ? _value * 50 : _value;
     }
 
     void ItemMove()
     {
         transform.position -= transform.forward * _speed * Time.deltaTime;
+    }
+
+    int RandomRank()
+    {
+        float rank4 = 0.01f;
+        float rank3 = 0.05f;
+        float rank2 = 0.14f;
+        //float rank1 = 0.8f;
+
+        float rand = UnityEngine.Random.value;
+
+        if (rand < rank4)
+            return 4;
+        else if (rand < rank4 + rank3)
+            return 3;
+        else if (rand < rank4 + rank3 + rank2)
+            return 2;
+        else
+            return 1;
     }
 
     void HpValueSet(float value)
@@ -124,6 +142,6 @@ public class Item : MonoBehaviour
                 type = "°Ë ¼Óµµ";
                 break;
         }
-        return type + " + " + _value;
+        return type + " + " + Mathf.FloorToInt(_value);
     }
 }

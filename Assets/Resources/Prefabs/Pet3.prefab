@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 91962117987116149, guid: 07be885c5d1809342892e29c2c5e2e43, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.261096
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 91962117987116149, guid: 07be885c5d1809342892e29c2c5e2e43, type: 3}
       propertyPath: m_LocalPosition.y
@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 91962117987116149, guid: 07be885c5d1809342892e29c2c5e2e43, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.928032
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 91962117987116149, guid: 07be885c5d1809342892e29c2c5e2e43, type: 3}
       propertyPath: m_LocalRotation.w
@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 724349067099537103, guid: 07be885c5d1809342892e29c2c5e2e43, type: 3}
       propertyPath: m_Name
-      value: Pet3 Variant
+      value: Pet3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

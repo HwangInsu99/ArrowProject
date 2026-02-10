@@ -18,10 +18,6 @@ public class ItemSpawner : MonoBehaviour
         if (_item == null) return;
 
         GameObject item = Instantiate(_item, pos, Quaternion.identity);
-
-        if (_player._isMaxSpeed && item.TryGetComponent<Item>(out Item itemComp))
-            itemComp._isMaxSpeed = true;
-
         GameManager.Instance.CallItemUI(item);
     }
 }

@@ -53,7 +53,6 @@ public class Player : MonoBehaviour
     private float _armor;
     private float _reduceDamage = 1.0f;
     private Vector3 _startPos;
-    public bool _isMaxSpeed { get; private set; } = false;
 
     public event Action<float> OnHpChanged;
     public event Action<Player> OnDead;
@@ -83,6 +82,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            GameManager.Instance.CallUpgradeUI();
+        }
         if (_atkCool <= 0)
             ArrowFire();
 
@@ -160,6 +163,7 @@ public class Player : MonoBehaviour
                 break;
             case StatType.ArrowSpeed:
                 _arrowSpeed *= Mathf.Pow(1.1f, value);
+                _arrowSpeed = Mathf.Clamp(_arrowSpeed, 0.5f, 30.0f);
                 CalcPower();
                 break;
             case StatType.PlayerHp:
@@ -191,7 +195,6 @@ public class Player : MonoBehaviour
                 if (_moveSpeed >= 8.0f)
                 {
                     _moveSpeed = 8.0f;
-                    _isMaxSpeed = true;
                 }
                 break;
             case StatType.CriticalPer:
