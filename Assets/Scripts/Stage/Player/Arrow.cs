@@ -60,7 +60,7 @@ public class Arrow : MonoBehaviour
         bool isCrit = CriticalAttack(_critPer);
         float arrowDamage = isCrit ? _damage * 2 : _damage;
         if (_suckPer > 0.0f)
-            GameManager.Instance.BloodSuck(arrowDamage * _suckPer * 0.01f);
+            GameManager.Instance.LifeSteal(arrowDamage * _suckPer * 0.01f);
         return (arrowDamage, isCrit);
     }
 

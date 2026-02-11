@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {    public static GameManager Instance { get; private set; }
@@ -9,6 +10,9 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        if (_uiManager == null) Debug.LogError($"{name}: UIManager 연결 안함");
+        if (_itemSpawner == null) Debug.LogError($"{name}: ItemSpawner 연결 안함");
+        if (_player == null) Debug.LogError($"{name}: Player 연결 안함");
     }
 
     public void PauseGame(bool pause)
@@ -54,10 +58,16 @@ public class GameManager : MonoBehaviour
         _uiManager.CallMoney();
     }
 
-    public void BloodSuck(float suck)
+    public void LifeSteal(float suck)
     {
         _player.ParameterChange(StatType.PlayerHp, suck);
     }
 
     public void ChangeEnemyBaseHP(float hp) => _enemyBaseHp = hp;
+    
+    public void ReturnTitle()
+    {
+        PauseGame(false);
+        SceneManager.LoadScene("Lobby");
+    }
 }

@@ -7,10 +7,19 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Canvas _mainCanvas;
     [SerializeField] private UpgradeData _upgradeData;
     [SerializeField] private GameObject _upgradePanel;
+    [SerializeField] private GameObject _pausePanel;
+    [SerializeField] private GameObject _optionPanel;
     [SerializeField] private GameObject _hpUI;
     [SerializeField] private GameObject _itemUI;
     [SerializeField] private ScoreUI _scoreUI;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            CallPause();
+        }
+    }
 
     public void CallUpgradeData()
     {
@@ -40,13 +49,31 @@ public class UIManager : MonoBehaviour
         ui.SetItemUI(target.transform, target.GetComponent<Item>());
     }
 
-    public void CallScore(int score)
+    public void CallScore(int score) => _scoreUI.ChangeScore(score);
+    public void CallMoney() => _scoreUI.SetMoney();
+    public void CallPause()
     {
-        _scoreUI.ChangeScore(score);
+        _pausePanel.SetActive(true);
+        GameManager.Instance.PauseGame(true);
     }
 
-    public void CallMoney()
+    public void ClosePause()
     {
-        _scoreUI.SetMoney();
+        _pausePanel.SetActive(false);
+        GameManager.Instance.PauseGame(false);
+    }
+
+    public void CallOption()
+    {
+        _optionPanel.SetActive(true);
+    }
+
+    public void CloseOption()
+    {
+        _optionPanel.SetActive(false);
+    }
+    public void ReturnTitle()
+    {
+        GameManager.Instance.ReturnTitle();
     }
 }

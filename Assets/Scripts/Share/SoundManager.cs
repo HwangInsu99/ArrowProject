@@ -39,6 +39,10 @@ public class SoundManager : MonoBehaviour
     private float _arrowSoundCool = 0.2f;
     private float _arrowSoundTimer;
 
+    public float MasterVolume => _masterVolume;
+    public float BGMVolume => _bgmVolume;
+    public float SfxVolume => _sfxVolume;
+
     void Awake()
     {
         if (Instance != null)
@@ -122,5 +126,22 @@ public class SoundManager : MonoBehaviour
     void ApplyPitch(AudioSource source)
     {
         source.pitch = _randomPitch ? Random.Range(_pitchRange.x, _pitchRange.y) : 1.0f;
+    }
+
+    public void MasterVolumeChange(float value)
+    {
+        _masterVolume = value;
+        _bgmSource.volume = _bgmVolume * _masterVolume * 0.5f;
+    }
+
+    public void BGMVolumeChange(float value)
+    {
+        _bgmVolume = value;
+        _bgmSource.volume = _bgmVolume * _masterVolume * 0.5f;
+    }
+
+    public void SfxVolumeChange(float value)
+    {
+        _sfxVolume = value;
     }
 }

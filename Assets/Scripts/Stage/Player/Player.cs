@@ -15,7 +15,7 @@ public enum StatType
     SwordSpeed,
     MoveSpeed,
     CriticalPer,
-    BloodSuck,
+    LifeSteal,
     SpeedDamage,
     SummonPet,
     ArmorUp
@@ -82,10 +82,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            GameManager.Instance.CallUpgradeUI();
-        }
         if (_atkCool <= 0)
             ArrowFire();
 
@@ -200,7 +196,7 @@ public class Player : MonoBehaviour
             case StatType.CriticalPer:
                 _critPer += value;
                 break;
-            case StatType.BloodSuck:
+            case StatType.LifeSteal:
                 _suckPer += value;
                 break;
             case StatType.SpeedDamage:
