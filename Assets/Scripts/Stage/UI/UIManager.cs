@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _optionPanel;
     [SerializeField] private GameObject _hpUI;
     [SerializeField] private GameObject _itemUI;
+    [SerializeField] private GameObject _endUI;
     [SerializeField] private ScoreUI _scoreUI;
 
     private void Update()
@@ -75,5 +76,15 @@ public class UIManager : MonoBehaviour
     public void ReturnTitle()
     {
         GameManager.Instance.ReturnTitle();
+    }
+    
+    public void CallEndUI()
+    {
+        _endUI.SetActive(true);
+    }
+
+    public void Restart()
+    {
+        GameManager.Instance.Restrat();
     }
 }

@@ -11,9 +11,10 @@ public class Arrow : MonoBehaviour
     private float _speed;
     private float _maxDistance;
     private float _remainDistance;
-    private float _damage;
+    [SerializeField]private float _damage;
     private float _critPer = 0.0f;
     private float _suckPer = 0.0f;
+    private float _reduceDamagePer = 80;
 
     bool _isPenetrate = false;
 
@@ -45,7 +46,31 @@ public class Arrow : MonoBehaviour
     {
         float dist = _speed * Time.deltaTime;
         _remainDistance -= dist;
-        transform.position += transform.forward * dist;
+        Vector3 pos = transform.position + transform.forward * dist;
+        int layerMask = (1 << LayerMask.NameToLayer("Enemy")) | (1 << LayerMask.NameToLayer("KillZone"));
+
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, 0.2f, transform.forward, dist, layerMask);
+
+        System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+
+        foreach(var hit in hits)
+        {
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("KillZone"))
+            {
+                transform.position = hit.point;
+                return;
+            }
+            Enemy enemy;
+            if(hit.collider.TryGetComponent<Enemy>(out enemy))
+            {
+                transform.position = hit.point;
+                enemy.HitArrow(this);
+                if (!gameObject.activeSelf)
+                    return;
+            }
+        }
+
+        transform.position = pos;
     }
 
     bool CriticalAttack(float critPer)
@@ -69,6 +94,8 @@ public class Arrow : MonoBehaviour
         if (!_isPenetrate)
         {
             _mySpawner.DespawnArrow(gameObject);
+            return;
         }
+        _damage *= 1 - _reduceDamagePer * 0.01f;
     }
 }

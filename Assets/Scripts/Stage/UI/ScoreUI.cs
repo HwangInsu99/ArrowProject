@@ -8,7 +8,6 @@ public class ScoreUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private TextMeshProUGUI _moneyText;
     private int _score;
-    private int _money;
 
     void Start()
     {
@@ -24,7 +23,6 @@ public class ScoreUI : MonoBehaviour
 
     public void SetMoney()
     {
-        _money = GameData.Instance._money;
-        _moneyText.text = "µ·: " + _money.ToString();
+        _moneyText.text = "µ·: " + GameData.Instance.Money.ToString();
     }
 }

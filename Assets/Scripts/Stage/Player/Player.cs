@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     private float _critPer = 0.0f;
     private float _suckPer = 0.0f;
     private float _speedPowerPer = 0.0f;
-    private bool _isPenetrate = false;
+    [SerializeField] private bool _isPenetrate = false;
     public float _hp { get; private set; } = 100;
     [SerializeField] private float _atkAniSpeed = 1.5f;
     [SerializeField] private float _atkRate = 1.0f;
@@ -75,8 +75,9 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        _animator.SetFloat(_paramAtkSpeed, _atkAniSpeed);
         _startPos = transform.position;
+        SetParameter();
+        _animator.SetFloat(_paramAtkSpeed, _atkAniSpeed);
         CalcPower();
     }
 
@@ -88,6 +89,20 @@ public class Player : MonoBehaviour
         CharacterMove();
         _animator.SetTrigger(_paramAtk);
         _atkCool -= Time.deltaTime;
+    }
+
+    void SetParameter()
+    {
+        GameData stat = GameData.Instance;
+        ParameterChange(StatType.PlayerHp, stat.HP);
+        ParameterChange(StatType.ArrowPower, stat.Power);
+        ParameterChange(StatType.AttackRate, stat.Rate);
+        ParameterChange(StatType.SwordCreate, stat.SwordNum);
+        ParameterChange(StatType.SpeedDamage, stat.SpeedD);
+        ParameterChange(StatType.CriticalPer, stat.Crit);
+        ParameterChange(StatType.LifeSteal, stat.LifeSteal);
+        ParameterChange(StatType.ArmorUp, stat.ReduceD);
+        _isPenetrate = stat.Penetrate;
     }
 
     void CharacterMove()
@@ -131,9 +146,9 @@ public class Player : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("게임 종료 로비로");
+        Debug.Log("플레이어 사망");
         OnDead?.Invoke(this);
-        GameManager.Instance.PauseGame(true);
+        GameManager.Instance.GameOver();
     }
 
     public void DataAnalyze(UpgradeDataSO data)
@@ -159,7 +174,6 @@ public class Player : MonoBehaviour
                 break;
             case StatType.ArrowSpeed:
                 _arrowSpeed *= Mathf.Pow(1.1f, value);
-                _arrowSpeed = Mathf.Clamp(_arrowSpeed, 0.5f, 30.0f);
                 CalcPower();
                 break;
             case StatType.PlayerHp:
@@ -201,7 +215,8 @@ public class Player : MonoBehaviour
                 break;
             case StatType.SpeedDamage:
                 _speedPowerPer += value;
-                _speedPower = _arrowSpeed * (_speedPowerPer * 0.01f);
+                _speedPower = _arrowSpeed * (1.0f + _speedPowerPer * 0.01f);
+                
                 CalcPower();
                 break;
             case StatType.SummonPet:

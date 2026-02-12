@@ -52,9 +52,9 @@ public class GameManager : MonoBehaviour
         _uiManager.CallScore(score);
     }
 
-    public void IncreaseMoney(int money)
+    public void ChangeMoney(int money)
     {
-        GameData.Instance.IncreaseMoney(money);
+        GameData.Instance.ChangeMoney(money);
         _uiManager.CallMoney();
     }
 
@@ -69,5 +69,18 @@ public class GameManager : MonoBehaviour
     {
         PauseGame(false);
         SceneManager.LoadScene("Lobby");
+    }
+
+    public void GameOver()
+    {
+        PauseGame(true);
+        _uiManager.CallEndUI();
+    }
+
+    public void Restrat()
+    {
+        PauseGame(false);
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
     }
 }

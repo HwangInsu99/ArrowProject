@@ -26,4 +26,9 @@ public class UIController : MonoBehaviour
     {
         _uimanager.ReturnTitle();
     }
+
+    public void Restart()
+    {
+        _uimanager.Restart();
+    }
 }

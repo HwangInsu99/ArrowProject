@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     private bool _isDead = false;
     private float _hitSoundCool = 0.15f;
     private float _hitSoundTimer;
+    private Arrow _lastHitCollider;
 
     public event Action<float> OnDamaged;
     public event Action<Enemy> OnDead;
@@ -51,24 +52,25 @@ public class Enemy : MonoBehaviour
             );
     }
 
+    public void HitArrow(Arrow arrow)
+    {
+        if (arrow == _lastHitCollider)
+            return;
+
+        _lastHitCollider = arrow;
+
+        // 나중에 시각화 할때 크리티컬 여부에 따라 데미지 색을 바꾸기 위해
+        (float damage, bool isCrit) = arrow.Damage();
+        arrow.OnHit();
+        EnemyDamaged(damage);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other == null || _isDead)
             return;
         if (other.gameObject.layer == LayerMask.NameToLayer(_attackLayer))
-        {
-            if (other.gameObject.CompareTag("Arrow"))
-            {
-                Arrow arrow = other.GetComponent<Arrow>();
-                if (arrow == null)
-                    return;
-
-                // 나중에 시각화 할때 크리티컬 여부에 따라 데미지 색을 바꾸기 위해
-                (float damage, bool isCrit) = arrow.Damage();
-                arrow.OnHit();
-                EnemyDamaged(damage);
-            }
-
+        {            
             if (other.gameObject.CompareTag("Fire"))
             {
                 PetFire fire = other.GetComponent<PetFire>();
@@ -127,7 +129,7 @@ public class Enemy : MonoBehaviour
         if (gameObject.CompareTag("Boss"))
         {
             GameManager.Instance.IncreaseScore(_bossScore);
-            GameManager.Instance.IncreaseMoney(_dropMoney);
+            GameManager.Instance.ChangeMoney(_dropMoney);
             GameManager.Instance.CallUpgradeUI();
             GameManager.Instance.PauseGame(true);
         }
