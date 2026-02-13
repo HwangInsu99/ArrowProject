@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
-public class Shop_Title : MonoBehaviour
+public class Shop_Lobby : MonoBehaviour
 {
-    public enum ShopType
+    public enum EShopType
     {
         HP,
         Power,
@@ -20,17 +17,17 @@ public class Shop_Title : MonoBehaviour
         ReduceDamage
     }
 
-    [SerializeField] private TextMeshProUGUI _money;
+    [SerializeField] private TMP_Text _money;
     [System.Serializable]
     public class ButtonObject
     {
         public GameObject button;
-        public TextMeshProUGUI priceText;
+        public TMP_Text priceText;
         public int price;
-        public ShopType type;
+        public EShopType type;
         public int max = 1;
         public int current;
-        public TextMeshProUGUI countText;
+        public TMP_Text countText;
     }
     [SerializeField] private ButtonObject[] _button = new ButtonObject[9];
     [SerializeField] private int _speedD = 10;
@@ -42,8 +39,8 @@ public class Shop_Title : MonoBehaviour
     {
         for (int i = 0; i < _button.Length; i++)
         {
-            _button[i].priceText = _button[i].button.GetComponentInChildren<TextMeshProUGUI>();
-            _button[i].type = (ShopType)i;
+            _button[i].priceText = _button[i].button.GetComponentInChildren<TMP_Text>();
+            _button[i].type = (EShopType)i;
 
             int index = i;
             Button button = _button[i].button.GetComponent<Button>();
@@ -65,37 +62,37 @@ public class Shop_Title : MonoBehaviour
         SetItem();
     }
 
-    int SetPrice(ShopType type)
+    int SetPrice(EShopType type)
     {
         int price = 0;
 
         switch (type)
         {
-            case ShopType.HP:
+            case EShopType.HP:
                 price = 10;
                 break;
-            case ShopType.Power:
+            case EShopType.Power:
                 price = 10;
                 break;
-            case ShopType.Rate:
+            case EShopType.Rate:
                 price = 10;
                 break;
-            case ShopType.Num:
+            case EShopType.Num:
                 price = 10;
                 break;
-            case ShopType.SpeedDamage:
+            case EShopType.SpeedDamage:
                 price = 20;
                 break;
-            case ShopType.Penetrate:
+            case EShopType.Penetrate:
                 price = 30;
                 break;
-            case ShopType.LifeSteal:
+            case EShopType.LifeSteal:
                 price = 20;
                 break;
-            case ShopType.Crit:
+            case EShopType.Crit:
                 price = 40;
                 break;
-            case ShopType.ReduceDamage:
+            case EShopType.ReduceDamage:
                 price = 30;
                 break;
         }
@@ -116,31 +113,31 @@ public class Shop_Title : MonoBehaviour
             item.countText.text = $"{item.current} / {item.max}";
         switch (item.type)
         {
-            case ShopType.HP:                
+            case EShopType.HP:                
                 GameData.Instance.UpgradeHP();
                 break;
-            case ShopType.Power:
+            case EShopType.Power:
                 GameData.Instance.UpgradePower();
                 break;
-            case ShopType.Rate:
+            case EShopType.Rate:
                 GameData.Instance.UpgradeRate();
                 break;
-            case ShopType.Num:
+            case EShopType.Num:
                 GameData.Instance.UpgradeSwordNum();
                 break;
-            case ShopType.SpeedDamage:
+            case EShopType.SpeedDamage:
                 GameData.Instance.UpgradeSpeedD(_speedD);
                 break;
-            case ShopType.Penetrate:
+            case EShopType.Penetrate:
                 GameData.Instance.UpgradePenetrate();
                 break;
-            case ShopType.LifeSteal:
+            case EShopType.LifeSteal:
                 GameData.Instance.UpgradeLifeSteal(_lifeSteal);
                 break;
-            case ShopType.Crit:
+            case EShopType.Crit:
                 GameData.Instance.UpgradeCrit(_crit);
                 break;
-            case ShopType.ReduceDamage:
+            case EShopType.ReduceDamage:
                 GameData.Instance.UpgradeReduceD(_reduceD);
                 break;
         }
@@ -173,19 +170,19 @@ public class Shop_Title : MonoBehaviour
         }
     }
 
-    int TypeData(ShopType type)
+    int TypeData(EShopType type)
     {
         return type switch
         {
-            ShopType.HP => GameData.Instance.HP,
-            ShopType.Power => GameData.Instance.Power,
-            ShopType.Rate => GameData.Instance.Rate,
-            ShopType.Num => GameData.Instance.SwordNum,
-            ShopType.SpeedDamage => GameData.Instance.SpeedD > 0 ? 1 : 0,
-            ShopType.Penetrate => GameData.Instance.Penetrate ? 1 : 0,
-            ShopType.LifeSteal => GameData.Instance.LifeSteal > 0 ? 1 : 0,
-            ShopType.Crit => GameData.Instance.Crit > 0 ? 1 : 0,
-            ShopType.ReduceDamage => GameData.Instance.ReduceD > 0 ? 1 : 0,
+            EShopType.HP => GameData.Instance.HP,
+            EShopType.Power => GameData.Instance.Power,
+            EShopType.Rate => GameData.Instance.Rate,
+            EShopType.Num => GameData.Instance.SwordNum,
+            EShopType.SpeedDamage => GameData.Instance.SpeedD > 0 ? 1 : 0,
+            EShopType.Penetrate => GameData.Instance.Penetrate ? 1 : 0,
+            EShopType.LifeSteal => GameData.Instance.LifeSteal > 0 ? 1 : 0,
+            EShopType.Crit => GameData.Instance.Crit > 0 ? 1 : 0,
+            EShopType.ReduceDamage => GameData.Instance.ReduceD > 0 ? 1 : 0,
             _ => 0
         };
     }

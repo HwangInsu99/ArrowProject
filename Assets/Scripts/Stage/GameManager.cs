@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {    public static GameManager Instance { get; private set; }
@@ -60,15 +59,14 @@ public class GameManager : MonoBehaviour
 
     public void LifeSteal(float suck)
     {
-        _player.ParameterChange(StatType.PlayerHp, suck);
+        _player.ParameterChange(EStatType.PlayerHp, suck);
     }
 
     public void ChangeEnemyBaseHP(float hp) => _enemyBaseHp = hp;
     
     public void ReturnTitle()
     {
-        PauseGame(false);
-        SceneManager.LoadScene("Lobby");
+        SceneFlowManager.Instance.LoadScene(ESceneID.Lobby);
     }
 
     public void GameOver()
@@ -79,8 +77,6 @@ public class GameManager : MonoBehaviour
 
     public void Restrat()
     {
-        PauseGame(false);
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(currentSceneName);
+        SceneFlowManager.Instance.ReloadScene();
     }
 }

@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -10,7 +7,7 @@ public class LobbyManager : MonoBehaviour
 
     public void GameStart()
     {
-        SceneManager.LoadScene("Stage");
+        SceneFlowManager.Instance.LoadScene(ESceneID.Stage);
     }
 
     public void CallOption()

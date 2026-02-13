@@ -29,7 +29,7 @@ public class GameData : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
@@ -55,7 +55,14 @@ public class GameData : MonoBehaviour
     public void UpgradeLifeSteal(int value) => _lifeSteal = value;
     public void UpgradeCrit(int value) => _crit = value;
     public void UpgradeReduceD(int value) => _reduceD = value;
-    
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
 }
 
 public static class DataSave

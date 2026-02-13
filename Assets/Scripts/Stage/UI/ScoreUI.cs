@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class ScoreUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _scoreText;
-    [SerializeField] private TextMeshProUGUI _moneyText;
+    [SerializeField] private TMP_Text _scoreText;
+    [SerializeField] private TMP_Text _moneyText;
     private int _score;
 
     void Start()

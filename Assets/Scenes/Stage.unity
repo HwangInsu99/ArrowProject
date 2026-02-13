@@ -1945,6 +1945,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: HPUI
       objectReference: {fileID: 0}
+    - target: {fileID: 3606996818979805768, guid: 9927753f224c1114a8adda4267935acd, type: 3}
+      propertyPath: m_fontSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3606996818979805768, guid: 9927753f224c1114a8adda4267935acd, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3606996818979805768, guid: 9927753f224c1114a8adda4267935acd, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4453809220688485977, guid: 9927753f224c1114a8adda4267935acd, type: 3}
       propertyPath: _target
       value: 

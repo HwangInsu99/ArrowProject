@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -46,6 +44,7 @@ public class UIManager : MonoBehaviour
     public void CreateItemUI(GameObject target)
     {
         GameObject itemUI = Instantiate(_itemUI, _mainCanvas.transform);
+        itemUI.transform.SetAsFirstSibling();
         ItemUI ui = itemUI.GetComponent<ItemUI>();
         ui.SetItemUI(target.transform, target.GetComponent<Item>());
     }
@@ -81,6 +80,11 @@ public class UIManager : MonoBehaviour
     public void CallEndUI()
     {
         _endUI.SetActive(true);
+    }
+
+    public void CloseEndUI()
+    {
+        _endUI.SetActive(false);
     }
 
     public void Restart()

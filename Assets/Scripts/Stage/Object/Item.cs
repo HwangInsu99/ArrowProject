@@ -6,7 +6,7 @@ public class Item : MonoBehaviour
     [SerializeField] private string _playerLayer = "Player";
 
     private float _speed = 2.0f;
-    private StatType _type;
+    private EStatType _type;
     private float _value;
     private int _maxNum;
     public bool _isMaxSpeed;
@@ -25,14 +25,14 @@ public class Item : MonoBehaviour
 
     void SetStatus()
     {
-        var enumvalue = Enum.GetValues(enumType: typeof(StatType));
+        var enumvalue = Enum.GetValues(enumType: typeof(EStatType));
         _maxNum = enumvalue.Length - 5;
 
         if (_isMaxSpeed) _maxNum--;
 
-        _type = (StatType)enumvalue.GetValue(UnityEngine.Random.Range(0, _maxNum));
+        _type = (EStatType)enumvalue.GetValue(UnityEngine.Random.Range(0, _maxNum));
         _value = RandomRank();
-        if (_type == StatType.PlayerHp)
+        if (_type == EStatType.PlayerHp)
             HpValueSet(_value);
     }
 
@@ -108,37 +108,37 @@ public class Item : MonoBehaviour
         string type = "";
         switch (_type)
         {
-            case StatType.ArrowPower:
+            case EStatType.ArrowPower:
                 type = "화살 공격력";
                 break;
-            case StatType.ArrowSpeed:
+            case EStatType.ArrowSpeed:
                 type = "화살 속도";
                 break;
-            case StatType.AttackRate:
+            case EStatType.AttackRate:
                 type = "화살 발사빈도";
                 break;
-            case StatType.PlayerHp:
+            case EStatType.PlayerHp:
                 type = "체력";
                 break;
-            case StatType.ArrowRange:
+            case EStatType.ArrowRange:
                 type = "화살 사거리";
                 break;
-            case StatType.MoveSpeed:
+            case EStatType.MoveSpeed:
                 type = "가로 이동속도";
                 break;
-            case StatType.SwordCreate:
+            case EStatType.SwordCreate:
                 type = "검 갯수";
                 break;
-            case StatType.SwordPower:
+            case EStatType.SwordPower:
                 type = "검 공격력";
                 break;
-            case StatType.SwordRange:
+            case EStatType.SwordRange:
                 type = "검 사거리";
                 break;
-            case StatType.SwordRate:
+            case EStatType.SwordRate:
                 type = "검 쿨타임감소";
                 break;
-            case StatType.SwordSpeed:
+            case EStatType.SwordSpeed:
                 type = "검 속도";
                 break;
         }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class HpUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _hpText;
+    [SerializeField] private TMP_Text _hpText;
     [SerializeField] private Transform _target;
     [SerializeField] private Vector3 _offset;
     private Camera _camera;
@@ -44,6 +44,9 @@ public class HpUI : MonoBehaviour
 
         Vector3 screenPos = _camera.WorldToScreenPoint(_target.position + _offset);
         transform.position = screenPos;
+        float dist = Vector3.Distance(_camera.transform.position, _target.transform.position);
+        float dynamicScale = Mathf.Clamp(1.0f / dist * 10f, 0.6f, 1.5f);
+        transform.localScale = Vector3.one * dynamicScale;
     }
 
     void ChangeHp(float hp)

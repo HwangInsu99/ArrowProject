@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Sword : MonoBehaviour
@@ -53,7 +51,7 @@ public class Sword : MonoBehaviour
         {
             _state = State.Chase;
             transform.SetParent(null);
-            SoundManager.Instance.PlaySfx(SfxType.Sword);
+            SoundManager.Instance.PlaySfx(ESfxType.Sword);
         }
     }
 
@@ -81,7 +79,7 @@ public class Sword : MonoBehaviour
         {
             _state = State.Chase;
             transform.SetParent(null);
-            SoundManager.Instance.PlaySfx(SfxType.Sword);
+            SoundManager.Instance.PlaySfx(ESfxType.Sword);
         }
     }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public struct StatInfo
 {
-    public StatType type;
+    public EStatType type;
     public float value;
 }
 
@@ -15,7 +15,7 @@ public class UpgradeData : MonoBehaviour
     [SerializeField] private UpgradeDataSO[] _statDatas;
     private int _rank;
     private int _reRollCost = 2;
-    [SerializeField] private TextMeshProUGUI _costText;
+    [SerializeField] private TMP_Text _costText;
     
     public void RandomStat()
     {

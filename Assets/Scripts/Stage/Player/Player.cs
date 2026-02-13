@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public enum StatType
+public enum EStatType
 {
     ArrowPower,
     ArrowSpeed,
@@ -94,14 +94,14 @@ public class Player : MonoBehaviour
     void SetParameter()
     {
         GameData stat = GameData.Instance;
-        ParameterChange(StatType.PlayerHp, stat.HP);
-        ParameterChange(StatType.ArrowPower, stat.Power);
-        ParameterChange(StatType.AttackRate, stat.Rate);
-        ParameterChange(StatType.SwordCreate, stat.SwordNum);
-        ParameterChange(StatType.SpeedDamage, stat.SpeedD);
-        ParameterChange(StatType.CriticalPer, stat.Crit);
-        ParameterChange(StatType.LifeSteal, stat.LifeSteal);
-        ParameterChange(StatType.ArmorUp, stat.ReduceD);
+        ParameterChange(EStatType.PlayerHp, stat.HP);
+        ParameterChange(EStatType.ArrowPower, stat.Power);
+        ParameterChange(EStatType.AttackRate, stat.Rate);
+        ParameterChange(EStatType.SwordCreate, stat.SwordNum);
+        ParameterChange(EStatType.SpeedDamage, stat.SpeedD);
+        ParameterChange(EStatType.CriticalPer, stat.Crit);
+        ParameterChange(EStatType.LifeSteal, stat.LifeSteal);
+        ParameterChange(EStatType.ArmorUp, stat.ReduceD);
         _isPenetrate = stat.Penetrate;
     }
 
@@ -159,70 +159,70 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void ParameterChange(StatType type, float value)
+    public void ParameterChange(EStatType type, float value)
     {
         switch (type)
         {
-            case StatType.ArrowPower:
+            case EStatType.ArrowPower:
                 _power *= Mathf.Pow(1.1f, value);
                 CalcPower();
                 break;
-            case StatType.AttackRate:
+            case EStatType.AttackRate:
                 _atkRate *= Mathf.Pow(0.9f, value);
                 _atkAniSpeed *= Mathf.Pow(1.1f, value);
                 _animator.SetFloat(_paramAtkSpeed, _atkAniSpeed);
                 break;
-            case StatType.ArrowSpeed:
+            case EStatType.ArrowSpeed:
                 _arrowSpeed *= Mathf.Pow(1.1f, value);
                 CalcPower();
                 break;
-            case StatType.PlayerHp:
+            case EStatType.PlayerHp:
                 _hp += value;
                 OnHpChanged?.Invoke(_hp);
                 break;
-            case StatType.ArrowRange:
+            case EStatType.ArrowRange:
                 _range *= Mathf.Pow(1.1f, value);
                 break;
-            case StatType.SwordCreate:
+            case EStatType.SwordCreate:
                 _swordManager.CreateSword((int)value, _swordPower, _swordSpeed, _finder._currentTarget);
                 break;
-            case StatType.SwordPower:
+            case EStatType.SwordPower:
                 _swordPower *= Mathf.Pow(1.1f, value);
                 _swordManager.PowerUp(_swordPower);
                 break;
-            case StatType.SwordRange:
+            case EStatType.SwordRange:
                 _finder.IncreasArea();
                 break;
-            case StatType.SwordRate:
+            case EStatType.SwordRate:
                 _swordManager.SpawnRate((int)value);
                 break;
-            case StatType.SwordSpeed:
+            case EStatType.SwordSpeed:
                 _swordSpeed *= Mathf.Pow(1.1f, value);
                 _swordManager.SetSpeed(_swordSpeed);
                 break;
-            case StatType.MoveSpeed:
+            case EStatType.MoveSpeed:
                 _moveSpeed *= Mathf.Pow(1.1f, value);
                 if (_moveSpeed >= 8.0f)
                 {
                     _moveSpeed = 8.0f;
                 }
                 break;
-            case StatType.CriticalPer:
+            case EStatType.CriticalPer:
                 _critPer += value;
                 break;
-            case StatType.LifeSteal:
+            case EStatType.LifeSteal:
                 _suckPer += value;
                 break;
-            case StatType.SpeedDamage:
+            case EStatType.SpeedDamage:
                 _speedPowerPer += value;
                 _speedPower = _arrowSpeed * (1.0f + _speedPowerPer * 0.01f);
                 
                 CalcPower();
                 break;
-            case StatType.SummonPet:
+            case EStatType.SummonPet:
                 _petSpawner.SpawnPet((int)value, transform);
                 break;
-            case StatType.ArmorUp:
+            case EStatType.ArmorUp:
                 _armor += value;
                 _reduceDamage -= _armor * 0.01f;
                 _reduceDamage = Mathf.Clamp(_reduceDamage, 0.5f, 1.0f);

@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public enum BgmType
+public enum EBgmType
 {
     Main,
     Lobby
 }
 
-public enum SfxType
+public enum ESfxType
 {
     Arrow,
     Sword,
@@ -45,7 +43,7 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance != null)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
@@ -69,7 +67,7 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        PlayBGM(BgmType.Main);
+        PlayBGM(EBgmType.Main);
     }
 
     private void Update()
@@ -78,7 +76,7 @@ public class SoundManager : MonoBehaviour
             _arrowSoundTimer -= Time.deltaTime;
     }
 
-    private void PlayBGM(BgmType type)
+    private void PlayBGM(EBgmType type)
     {
         if(_bgmClip == null)
         {
@@ -90,7 +88,7 @@ public class SoundManager : MonoBehaviour
         _bgmSource.Play();
     }
 
-    public void PlaySfx(SfxType type)
+    public void PlaySfx(ESfxType type)
     {
         if (_sfxClip == null)
         {
@@ -100,7 +98,7 @@ public class SoundManager : MonoBehaviour
 
         switch (type)
         {
-            case SfxType.Arrow:
+            case ESfxType.Arrow:
                 if (_arrowSoundTimer > 0)
                     return;
                 _arrowSoundTimer = _arrowSoundCool;
@@ -108,13 +106,13 @@ public class SoundManager : MonoBehaviour
                 _arrowSource.volume = _sfxVolume * _masterVolume;
                 _arrowSource.PlayOneShot(_sfxClip[(int)type]);
                 break;
-            case SfxType.Sword:
+            case ESfxType.Sword:
                 ApplyPitch(_swordSource);
                 _swordSource.volume = _swordVolume * _sfxVolume * _masterVolume;
                 _swordSource.Stop();
                 _swordSource.PlayOneShot(_sfxClip[(int)type]);
                 break;
-            case SfxType.EnemyHit:
+            case ESfxType.EnemyHit:
                 ApplyPitch(_hitSource);
                 _hitSource.volume = _hitVolume * _sfxVolume * _masterVolume;
                 _hitSource.Stop();
@@ -143,5 +141,13 @@ public class SoundManager : MonoBehaviour
     public void SfxVolumeChange(float value)
     {
         _sfxVolume = value;
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
     }
 }
