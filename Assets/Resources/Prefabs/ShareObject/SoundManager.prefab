@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bgmSource: {fileID: 0}
   _bgmClip:
+  - {fileID: 8300000, guid: 6e8fda8bbc8afd14281e36298c3b2024, type: 3}
   - {fileID: 8300000, guid: 6156557aa69c04745945fc7071684810, type: 3}
   _arrowSource: {fileID: 0}
   _swordSource: {fileID: 0}

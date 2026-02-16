@@ -68,6 +68,7 @@ public class SceneCatalog : MonoBehaviour
 
     public bool TryGetSceneName(ESceneID id, out string sceneName)
     {
+
         return _idToName.TryGetValue(id, out sceneName);
     }
 

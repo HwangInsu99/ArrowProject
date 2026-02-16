@@ -2,8 +2,8 @@ using UnityEngine;
 
 public enum EBgmType
 {
-    Main,
-    Lobby
+    Lobby,
+    Stage
 }
 
 public enum ESfxType
@@ -65,18 +65,13 @@ public class SoundManager : MonoBehaviour
         _hitSource.playOnAwake = false;
     }
 
-    private void Start()
-    {
-        PlayBGM(EBgmType.Main);
-    }
-
     private void Update()
     {
         if (_arrowSoundTimer > 0)
             _arrowSoundTimer -= Time.deltaTime;
     }
 
-    private void PlayBGM(EBgmType type)
+    public void PlayBGM(EBgmType type)
     {
         if(_bgmClip == null)
         {
@@ -88,6 +83,7 @@ public class SoundManager : MonoBehaviour
         _bgmSource.Play();
     }
 
+    public void StopBGM() => _bgmSource.Stop();
     public void PlaySfx(ESfxType type)
     {
         if (_sfxClip == null)

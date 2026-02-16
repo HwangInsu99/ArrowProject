@@ -36,16 +36,40 @@ public class SceneFlowManager : MonoBehaviour
     {
         if (_transitionUI != null)
             _transitionUI.Init();
+
+        InitScene();
+    }
+
+    void InitScene()
+    {
+        string current = SceneManager.GetActiveScene().name;
+
+        if (string.IsNullOrEmpty(current))
+            return;
+        GetSceneBGMType(current, out EBgmType type);
+
+        SoundManager.Instance.PlayBGM(type);
     }
 
     public void LoadScene(ESceneID id)
     {
+        SoundManager.Instance.StopBGM();
         if (_catalog.TryGetSceneName(id, out string sceneName) == false)
             return;
         if (string.IsNullOrEmpty(sceneName))
             return;
 
         StartCoroutine(Co_LoadSceneWithTransition(id, sceneName));
+    }
+
+    void GetSceneBGMType(string sceneName, out EBgmType type)
+    {
+        type = sceneName switch
+        {
+            nameof(EBgmType.Lobby) => EBgmType.Lobby,
+            nameof(EBgmType.Stage) => EBgmType.Stage,
+            _ => EBgmType.Lobby
+        };
     }
 
     IEnumerator Co_LoadSceneWithTransition(ESceneID id, string sceneName)
@@ -84,6 +108,9 @@ public class SceneFlowManager : MonoBehaviour
             Debug.Log("게임매니저있음 = 스테이지 내부");
             GameManager.Instance.PauseGame(false);
         }
+
+        GetSceneBGMType(sceneName, out EBgmType type);
+        SoundManager.Instance.PlayBGM(type);
 
         Debug.Log($"씬 로드 -> {sceneName}");
         _isLoading = false;

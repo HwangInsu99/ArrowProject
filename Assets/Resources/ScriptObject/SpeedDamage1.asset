@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9520aaca7a0c72c4ca879023f0a647dd, type: 3}
   m_Name: SpeedDamage1
   m_EditorClassIdentifier: 
+  _sprite: {fileID: 21300000, guid: b752467da45d7124ab019ad3eecbca41, type: 3}
   _rank: 1
   _explain: "\uD654\uC0B4 \uC18D\uB3C4 \uB370\uBBF8\uC9C0 + 10%\n(\uD654\uC0B4\uB9CC
     \uC801\uC6A9)"

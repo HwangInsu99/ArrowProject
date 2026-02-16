@@ -4,6 +4,8 @@ using UnityEngine;
 [CreateAssetMenu]
 public class UpgradeDataSO : ScriptableObject
 {
+    [SerializeField] private Sprite _sprite;
+    public Sprite SpriteImage => _sprite;
     [SerializeField] private int _rank;
     public int Rank => _rank;
     [SerializeField, TextArea(1, 3)] private string _explain;

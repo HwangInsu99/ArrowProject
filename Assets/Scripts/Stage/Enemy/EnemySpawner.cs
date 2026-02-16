@@ -4,15 +4,13 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private FenceSpawner _fenceSpawner;
     [SerializeField] private UIManager _uiManager;
-    [System.Serializable]
-    public class EnemyType
-    {
-        public GameObject enemy;
-    }
-    public EnemyType[] _enemyType;
+    [Header ("적 프리펩")]
+    [SerializeField] private GameObject[] _genericEnemy;
+    [SerializeField] private GameObject[] _bossEnemy;
 
-    [SerializeField] private float _setDist = 3.5f;
-    // 능력치 강화 팬스가 나오고 몇 초 후에 만들지
+
+    [SerializeField] private float _setDist = 3.0f;
+    
     private float _maxTime;
     private float _minTime;
     private float _spawnTimer;
@@ -23,19 +21,19 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        if (_enemyType == null)
+        if (_genericEnemy == null || _bossEnemy == null)
         {
             Debug.LogWarning("소환할 적이 없음");
             return;
         }
 
-        SpawnEnemy(_enemyType[0]);
+        SpawnEnemy(_genericEnemy[RandomTarget()]);
         GameManager.Instance.ChangeEnemyBaseHP(_standardHp);
     }
 
     void Update()
     {
-        if (_enemyType == null)
+        if (_genericEnemy == null || _bossEnemy == null)
         {
             return;
         }
@@ -46,20 +44,21 @@ public class EnemySpawner : MonoBehaviour
         {
             if (_spawnBossCount == 0)
             {
-                SpawnEnemy(_enemyType[1]);
+                SpawnEnemy(_bossEnemy[RandomTarget()]);
                 _spawnBossCount = _nextBossCount;
                 SectionChange();
             }
             else
             {
-                SpawnEnemy(_enemyType[0]);
+                SpawnEnemy(_genericEnemy[RandomTarget()]);
                 _spawnBossCount--;
             }
         }
     }
 
-    void SpawnEnemy(EnemyType enemy)
+    void SpawnEnemy(GameObject enemy)
     {
+
         Vector3 spawnPos = transform.position;
         if (_spawnBossCount != 0)
         {
@@ -67,7 +66,7 @@ public class EnemySpawner : MonoBehaviour
             spawnPos += transform.right * _setDist * dir;
         }            
 
-        GameObject go = Instantiate(enemy.enemy, spawnPos, Quaternion.Euler(0, 180, 0));
+        GameObject go = Instantiate(enemy, spawnPos, Quaternion.Euler(0, 180, 0));
         go.GetComponent<Enemy>().SetHp(_standardHp, _section);
         GameManager.Instance.CallHpUI(go);
         SetSpawnTimer();
@@ -98,4 +97,6 @@ public class EnemySpawner : MonoBehaviour
         _standardHp += _section * 100.0f;
         GameManager.Instance.ChangeEnemyBaseHP(_standardHp);
     }
+
+    int RandomTarget() => Random.Range(0, 2);
 }

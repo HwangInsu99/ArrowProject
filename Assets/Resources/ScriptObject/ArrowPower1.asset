@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9520aaca7a0c72c4ca879023f0a647dd, type: 3}
   m_Name: ArrowPower1
   m_EditorClassIdentifier: 
+  _sprite: {fileID: 21300000, guid: e3cd4339025b59942b47b28d4176fc13, type: 3}
   _rank: 1
   _explain: "\uD654\uC0B4 \uACF5\uACA9\uB825 \uC99D\uAC00 + 5\n\uD654\uC0B4 \uBC1C\uC0AC
     \uBE48\uB3C4 - 2"

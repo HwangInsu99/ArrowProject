@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9520aaca7a0c72c4ca879023f0a647dd, type: 3}
   m_Name: Pet1
   m_EditorClassIdentifier: 
+  _sprite: {fileID: 21300000, guid: b5cd5a51904bc7f4b8da7fa9c9c53ad0, type: 3}
   _rank: 1
   _explain: "\uC18C\uD658\uC218\n\uACF5\uACA9\uB825 : 60"
   _info:

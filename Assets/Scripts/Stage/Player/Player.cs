@@ -79,6 +79,7 @@ public class Player : MonoBehaviour
         SetParameter();
         _animator.SetFloat(_paramAtkSpeed, _atkAniSpeed);
         CalcPower();
+        _atkCool = 0.5f;
     }
 
     void Update()
