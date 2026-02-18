@@ -1,9 +1,9 @@
 {
-    "_money": 4,
+    "_money": 70,
     "_hp": 0,
     "_power": 0,
     "_rate": 0,
-    "_num": 0,
+    "_num": 3,
     "_speedD": 0,
     "_isPenetrate": false,
     "_lifeSteal": 0,

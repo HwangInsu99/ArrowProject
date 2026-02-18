@@ -12,7 +12,7 @@ public class SwordManager : MonoBehaviour
     [SerializeField] private float _coolTime;
     private int _decreaseSpawnRate = 100;
 
-    void Start()
+    void Awake()
     {
         if (_sword == null)
         {

@@ -14,7 +14,6 @@ public class Pet : MonoBehaviour
 
     private readonly Queue<GameObject> _pool = new Queue<GameObject>();
 
-    // 파티클 3개정도가 동시에 존재하니까 4개를 만들면 될듯
     void Start()
     {
         for (int i = 0; i < _startPool; i++)
