@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class ItemSpawner : MonoBehaviour
 {
@@ -8,7 +8,7 @@ public class ItemSpawner : MonoBehaviour
     {
         if ( _item == null )
         {
-            Debug.LogWarning("¾ÆÀÌÅÛ ¾øÀ½");
+            Debug.LogWarning("ì•„ì´í…œ ì—†ìŒ");
             return;
         }
     }

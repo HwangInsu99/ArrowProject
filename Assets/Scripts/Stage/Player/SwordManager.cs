@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 public class SwordManager : MonoBehaviour
@@ -16,7 +16,7 @@ public class SwordManager : MonoBehaviour
     {
         if (_sword == null)
         {
-            Debug.LogWarning("Sword¸Å´ÏÀú¿¡ °Ë ¿ÀºêÁ§Æ® ¾øÀ½");
+            Debug.LogWarning("Swordë§¤ë‹ˆì €ì— ê²€ ì˜¤ë¸Œì íŠ¸ ì—†ìŒ");
             return;
         }
         _spawnPoint = transform;
@@ -84,7 +84,7 @@ public class SwordManager : MonoBehaviour
     {
         if (_swords.Count == 0)
             return;
-        Debug.Log("Å¸°Ù ¼Ò½Ç");
+        Debug.Log("íƒ€ê²Ÿ ì†Œì‹¤");
         foreach (Sword sword in _swords)
             sword.ClearTarget();
     }

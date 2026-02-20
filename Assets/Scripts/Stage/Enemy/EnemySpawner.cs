@@ -1,10 +1,10 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private FenceSpawner _fenceSpawner;
     [SerializeField] private UIManager _uiManager;
-    [Header ("Àû ÇÁ¸®Æé")]
+    [Header ("ì  í”„ë¦¬í©")]
     [SerializeField] private GameObject[] _genericEnemy;
     [SerializeField] private GameObject[] _bossEnemy;
 
@@ -23,7 +23,7 @@ public class EnemySpawner : MonoBehaviour
     {
         if (_genericEnemy == null || _bossEnemy == null)
         {
-            Debug.LogWarning("¼ÒÈ¯ÇÒ ÀûÀÌ ¾øÀ½");
+            Debug.LogWarning("ì†Œí™˜í•  ì ì´ ì—†ìŒ");
             return;
         }
 
@@ -81,7 +81,7 @@ public class EnemySpawner : MonoBehaviour
 
         if (_spawnBossCount == 1)
         {
-            // º¸½º°¡ ¼ÒÈ¯µÇ´Â °æ¿ì
+            // ë³´ìŠ¤ê°€ ì†Œí™˜ë˜ëŠ” ê²½ìš°
             _spawnTimer = time - 1.0f;
             return;
         }

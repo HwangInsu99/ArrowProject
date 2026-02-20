@@ -1,4 +1,4 @@
-using TMPro;
+Ôªøusing TMPro;
 using UnityEngine;
 
 public class ScoreUI : MonoBehaviour
@@ -16,11 +16,11 @@ public class ScoreUI : MonoBehaviour
     public void ChangeScore(int score)
     {
         _score += score;
-        _scoreText.text = "¡°ºˆ: " + _score.ToString();
+        _scoreText.text = "Ï†êÏàò: " + _score.ToString();
     }
 
     public void SetMoney()
     {
-        _moneyText.text = "µ∑: " + GameData.Instance.Money.ToString();
+        _moneyText.text = "Îèà: " + GameData.Instance.Money.ToString();
     }
 }

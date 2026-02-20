@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public enum EBgmType
 {
@@ -26,7 +26,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource _hitSource;
     [SerializeField] private AudioClip[] _sfxClip;
 
-    [Header("¿É¼Ç")]
+    [Header("ì˜µì…˜")]
     [SerializeField, Range(0f, 1f)] private float _masterVolume = 1.0f;
     [SerializeField, Range(0f, 1f)] private float _bgmVolume = 1.0f;
     [SerializeField, Range(0f, 1f)] private float _sfxVolume = 1.0f;
@@ -75,7 +75,7 @@ public class SoundManager : MonoBehaviour
     {
         if(_bgmClip == null)
         {
-            Debug.LogWarning("bgmClip ºñ¾îÀÖÀ½ / ÀÎ½ºÆåÅÍ È®ÀÎ");
+            Debug.LogWarning("bgmClip ë¹„ì–´ìˆìŒ / ì¸ìŠ¤í™í„° í™•ì¸");
             return;
         }
         _bgmSource.volume = _bgmVolume * _masterVolume * 0.5f;
@@ -88,7 +88,7 @@ public class SoundManager : MonoBehaviour
     {
         if (_sfxClip == null)
         {
-            Debug.LogWarning("sfxClip ºñ¾îÀÖÀ½ / ÀÎ½ºÆåÅÍ È®ÀÎ");
+            Debug.LogWarning("sfxClip ë¹„ì–´ìˆìŒ / ì¸ìŠ¤í™í„° í™•ì¸");
             return;
         }
 

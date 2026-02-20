@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -22,7 +22,7 @@ public class UpgradeData : MonoBehaviour
         _costText.text = $"-{_reRollCost}";
         if (_statDatas.Length < 3)
         {
-            Debug.LogError("ÀúÀåµÈ µ¥ÀÌÅÍ ºÎÁ·");
+            Debug.LogError("ì €ìž¥ëœ ë°ì´í„° ë¶€ì¡±");
             return;
         }
         _rank = RandomRank();
@@ -58,7 +58,7 @@ public class UpgradeData : MonoBehaviour
 
         if (count < _buttons.Length)
         {
-            Debug.LogError($"·©Å©{_rank} µ¥ÀÌÅÍ ºÎÁ·");
+            Debug.LogError($"ëž­í¬{_rank} ë°ì´í„° ë¶€ì¡±");
             return;
         }
         List<UpgradeDataSO> pool = new List<UpgradeDataSO>(_statDatas);
@@ -66,7 +66,7 @@ public class UpgradeData : MonoBehaviour
         for (int i = 0; i < _buttons.Length;)
         {
             int rand = Random.Range(0, pool.Count);
-            // È®Á¤µÈ ·©Å©°¡ ¾Æ´Ï¸é Àç¼±ÅÃ ÇÏ¸é¼­ ÀÌ¹ø °ª »èÁ¦
+            // í™•ì •ëœ ëž­í¬ê°€ ì•„ë‹ˆë©´ ìž¬ì„ íƒ í•˜ë©´ì„œ ì´ë²ˆ ê°’ ì‚­ì œ
             if (pool[rand].Rank == _rank)
             {
                 _buttons[i].SetParameterValue(pool[rand]);

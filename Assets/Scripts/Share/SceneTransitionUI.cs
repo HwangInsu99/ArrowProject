@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 public class SceneTransitionUI : MonoBehaviour
@@ -13,7 +13,7 @@ public class SceneTransitionUI : MonoBehaviour
     {
         if (_fadeGroup == null)
         {
-            Debug.LogWarning("FadeGroup ºñ¾î ÀÖÀ½");
+            Debug.LogWarning("FadeGroup ë¹„ì–´ ìˆìŒ");
             return;
         }
 
@@ -26,7 +26,7 @@ public class SceneTransitionUI : MonoBehaviour
     {
         if (_fadeGroup == null)
         {
-            Debug.LogWarning("Co_FadeTo ½ÇÆĞ -> _fadeGroup È®ÀÎ");
+            Debug.LogWarning("Co_FadeTo ì‹¤íŒ¨ -> _fadeGroup í™•ì¸");
             yield break;
         }
 

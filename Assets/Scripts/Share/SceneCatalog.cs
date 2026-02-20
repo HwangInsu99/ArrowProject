@@ -1,4 +1,4 @@
-using System;
+Ôªøusing System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,19 +41,19 @@ public class SceneCatalog : MonoBehaviour
 
             if (string.IsNullOrEmpty(entry.SceneName))
             {
-                Debug.LogWarning($"SceneEntry ∫ÒæÓ¿÷¿Ω / Id = {entry.Id}");
+                Debug.LogWarning($"SceneEntry ÎπÑÏñ¥ÏûàÏùå / Id = {entry.Id}");
                 continue;
             }
 
             if (_idToName.ContainsKey(entry.Id))
             {
-                Debug.LogWarning($"Id ¡ﬂ∫π : {entry.Id}");
+                Debug.LogWarning($"Id Ï§ëÎ≥µ : {entry.Id}");
                 continue;
             }
 
             if (_nameToId.ContainsKey(entry.SceneName))
             {
-                Debug.LogWarning($"¿Ã∏ß ¡ﬂ∫π : {entry.SceneName}");
+                Debug.LogWarning($"Ïù¥Î¶Ñ Ï§ëÎ≥µ : {entry.SceneName}");
                 continue;
             }
 

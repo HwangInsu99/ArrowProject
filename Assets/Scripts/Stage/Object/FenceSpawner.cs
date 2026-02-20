@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class FenceSpawner : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class FenceSpawner : MonoBehaviour
     {
         if (_fence == null)
         {
-            Debug.LogWarning("Ææ½º ¾øÀ½ ÀÎ½ºÅÏ½º È®ÀÎ");
+            Debug.LogWarning("íœìŠ¤ ì—†ìŒ ì¸ìŠ¤í„´ìŠ¤ í™•ì¸");
             return;
         }
     }

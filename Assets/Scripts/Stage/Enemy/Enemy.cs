@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -59,7 +59,7 @@ public class Enemy : MonoBehaviour
 
         _lastHitCollider = arrow;
 
-        // ³ªÁß¿¡ ½Ã°¢È­ ÇÒ¶§ Å©¸®Æ¼ÄÃ ¿©ºÎ¿¡ µû¶ó µ¥¹ÌÁö »öÀ» ¹Ù²Ù±â À§ÇØ
+        // ë‚˜ì¤‘ì— ì‹œê°í™” í• ë•Œ í¬ë¦¬í‹°ì»¬ ì—¬ë¶€ì— ë”°ë¼ ë°ë¯¸ì§€ ìƒ‰ì„ ë°”ê¾¸ê¸° ìœ„í•´
         (float damage, bool isCrit) = arrow.Damage();
         arrow.OnHit();
         EnemyDamaged(damage);
@@ -96,10 +96,10 @@ public class Enemy : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer(_playerLayer))
         {
             Player player = other.GetComponent<Player>();
-            Debug.Log("Ãæµ¹½Ã ÇÃ·¹ÀÌ¾î ÂüÁ¶");
+            Debug.Log("ì¶©ëŒì‹œ í”Œë ˆì´ì–´ ì°¸ì¡°");
             if (player == null)
             {
-                Debug.Log("Player°¡ ¾Æ´Ô");
+                Debug.Log("Playerê°€ ì•„ë‹˜");
                 return;
             }
             bool isEnd = player.PlayerDamaged(_hp);

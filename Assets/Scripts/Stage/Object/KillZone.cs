@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class KillZone : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class KillZone : MonoBehaviour
     private void Start()
     {
         if (_spawner == null)
-            Debug.LogWarning("ÀÌ Å³Á¸¿¡ ½ºÆ÷³Ê ÂüÁ¶ ¾ÈÇßÀ½", this);
+            Debug.LogWarning("ì´ í‚¬ì¡´ì— ìŠ¤í¬ë„ˆ ì°¸ì¡° ì•ˆí–ˆìŒ", this);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -20,7 +20,7 @@ public class KillZone : MonoBehaviour
 
         if (other.gameObject.layer == LayerMask.NameToLayer(_attackLayer))
         {
-            Debug.Log("Åõ»çÃ¼ ´ê¾ÒÀ½", this);
+            Debug.Log("íˆ¬ì‚¬ì²´ ë‹¿ì•˜ìŒ", this);
             if (other.gameObject.CompareTag("Arrow"))
             {
                 _spawner.DespawnArrow(other.gameObject);
@@ -34,14 +34,14 @@ public class KillZone : MonoBehaviour
 
         if (other.gameObject.layer == LayerMask.NameToLayer(_enemyLayer))
         {
-            Debug.Log("Àû ´ê¾ÒÀ½", this);
+            Debug.Log("ì  ë‹¿ì•˜ìŒ", this);
             Enemy enemy = other.GetComponent<Enemy>();
             enemy.Break();
         }
 
         if (other.gameObject.layer == LayerMask.NameToLayer(_itemLayer))
         {
-            Debug.Log("¾ÆÀÌÅÛ ´ê¾ÒÀ½", this);
+            Debug.Log("ì•„ì´í…œ ë‹¿ì•˜ìŒ", this);
             Item item = other.GetComponent<Item>();
             item.Break();
         }

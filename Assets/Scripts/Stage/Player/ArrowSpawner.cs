@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 public class ArrowSpawner : MonoBehaviour
@@ -17,7 +17,7 @@ public class ArrowSpawner : MonoBehaviour
     {
         if (_arrowType == null)
         {
-            Debug.LogWarning("È­»ì ¾È³Ö¾úÀ½");
+            Debug.LogWarning("í™”ì‚´ ì•ˆë„£ì—ˆìŒ");
             return;
         }
         _firePoint = transform;
@@ -53,7 +53,7 @@ public class ArrowSpawner : MonoBehaviour
 
     public void DespawnArrow(GameObject arrow)
     {
-        //Debug.Log("È¸¼ö");
+        //Debug.Log("íšŒìˆ˜");
         arrow.transform.SetParent(_firePoint);
         arrow.SetActive(false);
         _pool.Enqueue(arrow);

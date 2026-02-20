@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
@@ -85,7 +85,7 @@ public class Sword : MonoBehaviour
 
     public void ClearTarget()
     {
-        Debug.Log("Å¸°Ù »ç¶óÁü");
+        Debug.Log("íƒ€ê²Ÿ ì‚¬ë¼ì§");
         _target = null;
         bool isRest = (_state == State.Rest);
 

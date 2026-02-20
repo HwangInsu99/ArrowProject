@@ -1,4 +1,4 @@
-using TMPro;
+ï»¿using TMPro;
 using UnityEngine;
 
 public class HpUI : MonoBehaviour
@@ -31,7 +31,7 @@ public class HpUI : MonoBehaviour
 
     void SetHpUI(Player player)
     {
-        Debug.Log("ÇÃ·¹ÀÌ¾î ¿¬°á");
+        Debug.Log("í”Œë ˆì´ì–´ ì—°ê²°");
         player.OnHpChanged += ChangeHp;
         player.OnDead += Release;
         ChangeHp(player._hp);

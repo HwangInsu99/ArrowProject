@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,7 +24,7 @@ public class SceneFlowManager : MonoBehaviour
 
         if (_catalog == null)
         {
-            Debug.LogWarning("Ä«Å»·Î±× ºñ¾úÀ½");
+            Debug.LogWarning("ì¹´íƒˆë¡œê·¸ ë¹„ì—ˆìŒ");
             Destroy(gameObject);
             return;
         }
@@ -76,7 +76,7 @@ public class SceneFlowManager : MonoBehaviour
     {
         if (_isLoading)
         {
-            Debug.Log("¾À ÀüÈ¯Áß ÀÔ·Â ¹«½Ã");
+            Debug.Log("ì”¬ ì „í™˜ì¤‘ ì…ë ¥ ë¬´ì‹œ");
             yield break;
         }
 
@@ -105,14 +105,14 @@ public class SceneFlowManager : MonoBehaviour
 
         if (GameManager.Instance != null)
         {
-            Debug.Log("°ÔÀÓ¸Å´ÏÀúÀÖÀ½ = ½ºÅ×ÀÌÁö ³»ºÎ");
+            Debug.Log("ê²Œì„ë§¤ë‹ˆì €ìˆìŒ = ìŠ¤í…Œì´ì§€ ë‚´ë¶€");
             GameManager.Instance.PauseGame(false);
         }
 
         GetSceneBGMType(sceneName, out EBgmType type);
         SoundManager.Instance.PlayBGM(type);
 
-        Debug.Log($"¾À ·Îµå -> {sceneName}");
+        Debug.Log($"ì”¬ ë¡œë“œ -> {sceneName}");
         _isLoading = false;
     }
 
@@ -122,11 +122,11 @@ public class SceneFlowManager : MonoBehaviour
 
         if (_catalog.TryGetSceneId(current, out ESceneID id) == false)
         {
-            Debug.LogWarning($"¸®·Îµå ½ÇÆĞ -> {current}°¡ Ä«Å»·Î±×¿¡ ¾øÀ½");
+            Debug.LogWarning($"ë¦¬ë¡œë“œ ì‹¤íŒ¨ -> {current}ê°€ ì¹´íƒˆë¡œê·¸ì— ì—†ìŒ");
             return;
         }
 
-        Debug.Log($"Àç½ÃÀÛ : {current}");
+        Debug.Log($"ì¬ì‹œì‘ : {current}");
 
         LoadScene(id);
     }

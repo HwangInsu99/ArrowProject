@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Floor : MonoBehaviour
 {
@@ -15,7 +15,7 @@ public class Floor : MonoBehaviour
             _floorRenderer = GetComponent<Renderer>();
             if (_floorRenderer == null)
             {
-                print("ÀÎ½ºÆåÅÍ ·»´õ·¯ È®ÀÎ");
+                print("ì¸ìŠ¤í™í„° ë Œë”ëŸ¬ í™•ì¸");
                 return;
             }
         }

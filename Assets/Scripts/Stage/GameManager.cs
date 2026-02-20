@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {    public static GameManager Instance { get; private set; }
@@ -9,9 +9,9 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        if (_uiManager == null) Debug.LogError($"{name}: UIManager ¿¬°á ¾ÈÇÔ");
-        if (_itemSpawner == null) Debug.LogError($"{name}: ItemSpawner ¿¬°á ¾ÈÇÔ");
-        if (_player == null) Debug.LogError($"{name}: Player ¿¬°á ¾ÈÇÔ");
+        if (_uiManager == null) Debug.LogError($"{name}: UIManager ì—°ê²° ì•ˆí•¨");
+        if (_itemSpawner == null) Debug.LogError($"{name}: ItemSpawner ì—°ê²° ì•ˆí•¨");
+        if (_player == null) Debug.LogError($"{name}: Player ì—°ê²° ì•ˆí•¨");
     }
 
     public void PauseGame(bool pause)
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     public void CompleteUpgrade()
     {
-        Debug.Log("¼±ÅÃ ¿Ï·á");
+        Debug.Log("ì„ íƒ ì™„ë£Œ");
         _uiManager.CloseUpgradePanel();
         PauseGame(false);
     }

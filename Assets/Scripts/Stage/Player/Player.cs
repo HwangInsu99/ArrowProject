@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 
 public enum EStatType
@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
 
         if (_controller == null || _animator == null)
         {
-            Debug.LogError("¾Ö´Ï¸ŞÀÌÅÍ or ÄÁÆ®·Ñ·Î ¾øÀ½ / ÀÎ½ºÆåÅÍ È®ÀÎ");
+            Debug.LogError("ì• ë‹ˆë©”ì´í„° or ì»¨íŠ¸ë¡¤ë¡œ ì—†ìŒ / ì¸ìŠ¤í™í„° í™•ì¸");
             return;
         }
     }
@@ -147,7 +147,7 @@ public class Player : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("ÇÃ·¹ÀÌ¾î »ç¸Á");
+        Debug.Log("í”Œë ˆì´ì–´ ì‚¬ë§");
         OnDead?.Invoke(this);
         GameManager.Instance.GameOver();
     }

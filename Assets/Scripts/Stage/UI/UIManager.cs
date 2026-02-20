@@ -1,4 +1,4 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
 
     public void CloseUpgradePanel()
     {
-        Debug.Log("∆–≥Œ ¥›±‚");
+        Debug.Log("Ìå®ÎÑê Îã´Í∏∞");
         _upgradePanel.SetActive(false);
     }
 

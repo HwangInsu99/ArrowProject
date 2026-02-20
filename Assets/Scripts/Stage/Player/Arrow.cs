@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
@@ -79,7 +79,7 @@ public class Arrow : MonoBehaviour
         return Random.value < criticalRate;
     }
 
-    // 2°³º¸´Ù Àü´ÞÇÒ µ¥ÀÌÅÍ°¡ ¸¹¾ÆÁö¸é ±¸Á¶Ã¼·Î ½Â°Ý ±¸Á¶Ã¼´Â ¸ð³ëºñÇìÀÌºñ¾î¸¦ ¾È¾²´Â ½ºÅ©¸³Æ®¿¡¼­ Á¤ÀÇ
+    // 2ê°œë³´ë‹¤ ì „ë‹¬í•  ë°ì´í„°ê°€ ë§Žì•„ì§€ë©´ êµ¬ì¡°ì²´ë¡œ ìŠ¹ê²© êµ¬ì¡°ì²´ëŠ” ëª¨ë…¸ë¹„í—¤ì´ë¹„ì–´ë¥¼ ì•ˆì“°ëŠ” ìŠ¤í¬ë¦½íŠ¸ì—ì„œ ì •ì˜
     public (float damage, bool isCrit ) Damage()
     {
         bool isCrit = CriticalAttack(_critPer);

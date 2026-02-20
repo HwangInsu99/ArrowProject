@@ -1,4 +1,4 @@
-using TMPro;
+ï»¿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -102,7 +102,7 @@ public class Shop_Lobby : MonoBehaviour
     void BuyItem(int index)
     {
         var item = _button[index];
-        Debug.Log($"{index + 1}¹øÂ° ¹öÆ°");
+        Debug.Log($"{index + 1}ë²ˆì§¸ ë²„íŠ¼");
 
         if (GameData.Instance.Money < item.price)
             return;
@@ -151,7 +151,7 @@ public class Shop_Lobby : MonoBehaviour
 
     void SetMoney()
     {
-        _money.text = "µ·: " + GameData.Instance.Money;
+        _money.text = "ëˆ: " + GameData.Instance.Money;
     }
 
     void SetItem()

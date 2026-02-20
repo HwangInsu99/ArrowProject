@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Finder : MonoBehaviour
 {
@@ -16,7 +16,7 @@ public class Finder : MonoBehaviour
     {
         if (_swordManager == null)
         {
-            Debug.Log("sword¸Å´ÏÀú ÂüÁ¶ ¹ŞÀ½");
+            Debug.Log("swordë§¤ë‹ˆì € ì°¸ì¡° ë°›ìŒ");
             _swordManager = GetComponentInChildren<SwordManager>();
         }
         _targetMask = LayerMask.GetMask(_targetLayer);
@@ -61,7 +61,7 @@ public class Finder : MonoBehaviour
 
         if (best != _currentTarget)
         {
-            Debug.Log("Å¸°Ù º¯°æ");
+            Debug.Log("íƒ€ê²Ÿ ë³€ê²½");
             _currentTarget = best;
             _hadTarget = true;
             _swordManager.SendTarget(_currentTarget);

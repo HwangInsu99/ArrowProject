@@ -1,11 +1,11 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 
 public class CameraSet : MonoBehaviour
 {
     [SerializeField] private Transform _target;
     [SerializeField] private Camera _camera;
 
-    [Header("Ω√¡°")]
+    [Header("ÏãúÏ†ê")]
     [SerializeField] private Vector3 _cameraOffset = new Vector3(0f, 7.3f, -17f);
     [SerializeField] private float _cameraLookAtHeight = -9.0f;
 

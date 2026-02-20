@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 
 public class Item : MonoBehaviour
@@ -109,37 +109,37 @@ public class Item : MonoBehaviour
         switch (_type)
         {
             case EStatType.ArrowPower:
-                type = "È­»ì °ø°İ·Â";
+                type = "í™”ì‚´ ê³µê²©ë ¥";
                 break;
             case EStatType.ArrowSpeed:
-                type = "È­»ì ¼Óµµ";
+                type = "í™”ì‚´ ì†ë„";
                 break;
             case EStatType.AttackRate:
-                type = "È­»ì ¹ß»çºóµµ";
+                type = "í™”ì‚´ ë°œì‚¬ë¹ˆë„";
                 break;
             case EStatType.PlayerHp:
-                type = "Ã¼·Â";
+                type = "ì²´ë ¥";
                 break;
             case EStatType.ArrowRange:
-                type = "È­»ì »ç°Å¸®";
+                type = "í™”ì‚´ ì‚¬ê±°ë¦¬";
                 break;
             case EStatType.MoveSpeed:
-                type = "°¡·Î ÀÌµ¿¼Óµµ";
+                type = "ê°€ë¡œ ì´ë™ì†ë„";
                 break;
             case EStatType.SwordCreate:
-                type = "°Ë °¹¼ö";
+                type = "ê²€ ê°¯ìˆ˜";
                 break;
             case EStatType.SwordPower:
-                type = "°Ë °ø°İ·Â";
+                type = "ê²€ ê³µê²©ë ¥";
                 break;
             case EStatType.SwordRange:
-                type = "°Ë »ç°Å¸®";
+                type = "ê²€ ì‚¬ê±°ë¦¬";
                 break;
             case EStatType.SwordRate:
-                type = "°Ë ÄğÅ¸ÀÓ°¨¼Ò";
+                type = "ê²€ ì¿¨íƒ€ì„ê°ì†Œ";
                 break;
             case EStatType.SwordSpeed:
-                type = "°Ë ¼Óµµ";
+                type = "ê²€ ì†ë„";
                 break;
         }
         return type + " + " + Mathf.FloorToInt(_value);
